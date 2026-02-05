@@ -5,6 +5,9 @@
 int g_PlayBGHandle = -1;
 CharacterData g_CharacterData[CHARACTER_TYPE_MAX] = {};
 
+const float PLAYER_SPEED = 5.0f;
+
+
 void InitPlayScene()
 {
 }
@@ -35,6 +38,28 @@ void StepPlayScene()
 
 void UpdatePlayScene()
 {
+	CharacterData& player = g_CharacterData[CHARACTER_TYPE_HERO];
+
+	if (CheckHitKey(KEY_INPUT_UP))
+	{
+		player.pos.y -= PLAYER_SPEED;
+	}
+
+	if (CheckHitKey(KEY_INPUT_DOWN))
+	{
+		player.pos.y += PLAYER_SPEED;
+	}
+
+	if (CheckHitKey(KEY_INPUT_LEFT))
+	{
+		player.pos.x -= PLAYER_SPEED;
+	}
+
+	if (CheckHitKey(KEY_INPUT_RIGHT))
+	{
+		player.pos.x += PLAYER_SPEED;
+	}
+
 }
 
 void DrawPlayScene()
