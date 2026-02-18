@@ -7,8 +7,11 @@
     <Filter Include="Source\Player">
       <UniqueIdentifier>{83eaaa51-1c5a-4367-968b-988beb22ea5e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Input">
-      <UniqueIdentifier>{92b047de-cee6-4a81-8ba8-74535a2696b0}</UniqueIdentifier>
+    <Filter Include="Source\map">
+      <UniqueIdentifier>{f8ebb9db-0211-43fc-9f91-0aa12f5165f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\map\manager">
+      <UniqueIdentifier>{0f145805-2946-4968-b931-2648860f1198}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -18,13 +21,24 @@
     <ClCompile Include="Source\Player\Player.cpp">
       <Filter>Source\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Source\map\map.cpp">
+      <Filter>Source\map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\map\manager\mapmanager.cpp">
+      <Filter>Source\map\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\map\tileManager\tileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player\Player.h">
       <Filter>Source\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Input\Input.h">
-      <Filter>Source\Input</Filter>
+    <ClInclude Include="Source\map\map.h">
+      <Filter>Source\map</Filter>
     </ClInclude>
+    <ClInclude Include="Source\map\manager\mapmanager.h">
+      <Filter>Source\map\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\map\tileManager\tileManager.h" />
   </ItemGroup>
 </Project>
