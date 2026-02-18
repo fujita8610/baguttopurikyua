@@ -7,6 +7,9 @@
     <Filter Include="Source\Player">
       <UniqueIdentifier>{83eaaa51-1c5a-4367-968b-988beb22ea5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Input">
+      <UniqueIdentifier>{92b047de-cee6-4a81-8ba8-74535a2696b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -19,6 +22,9 @@
   <ItemGroup>
     <ClInclude Include="Source\Player\Player.h">
       <Filter>Source\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\Input.h">
+      <Filter>Source\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
