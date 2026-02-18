@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Super Jump Action", "Super Jump Action.vcxproj", "{2470BA51-69AE-494F-910A-474F73948550}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2470BA51-69AE-494F-910A-474F73948550}.Debug|x64.ActiveCfg = Debug|x64
+		{2470BA51-69AE-494F-910A-474F73948550}.Debug|x64.Build.0 = Debug|x64
+		{2470BA51-69AE-494F-910A-474F73948550}.Debug|x86.ActiveCfg = Debug|Win32
+		{2470BA51-69AE-494F-910A-474F73948550}.Debug|x86.Build.0 = Debug|Win32
+		{2470BA51-69AE-494F-910A-474F73948550}.Release|x64.ActiveCfg = Release|x64
+		{2470BA51-69AE-494F-910A-474F73948550}.Release|x64.Build.0 = Release|x64
+		{2470BA51-69AE-494F-910A-474F73948550}.Release|x86.ActiveCfg = Release|Win32
+		{2470BA51-69AE-494F-910A-474F73948550}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80F75DC8-C2EB-433A-828D-8B05E88F6BAE}
+	EndGlobalSection
+EndGlobal
