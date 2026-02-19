@@ -32,6 +32,8 @@ bool LoadMapCSV(const char* filename)
 
 void DrawMap()
 {
+    float scale = TileManager::GetScale();
+
     for (int y = 0; y < MAP_HEIGHT; y++)
     {
         for (int x = 0; x < MAP_WIDTH; x++)
@@ -42,10 +44,12 @@ void DrawMap()
 
             TileManager::DrawTile(
                 id,
-                x * TILE_SIZE,
-                y * TILE_SIZE
+                (int)(x * TILE_SIZE * scale),
+                (int)(y * TILE_SIZE * scale)
             );
         }
     }
 }
+
+
 

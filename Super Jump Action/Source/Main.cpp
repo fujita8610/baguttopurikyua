@@ -21,7 +21,10 @@ int main()
 	// タイルロード
 	TileManager::LoadTiles("Data/Map/1985_tiles.png", 8, 8);
 
-	// マップロード
+	// 拡大率設定 (倍率）
+	TileManager::SetScale(4.0f);
+
+    // マップロード
 	MapManager::Init();
 
 
