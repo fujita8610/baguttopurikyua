@@ -1,7 +1,8 @@
 #pragma once
 
-#define MAP_WIDTH  100
-#define MAP_HEIGHT 15
+#define MAP_WIDTH  26
+#define MAP_HEIGHT 8
+
 
 extern int g_Map[MAP_HEIGHT][MAP_WIDTH];
 
