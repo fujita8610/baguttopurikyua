@@ -1,4 +1,4 @@
-#include "TileManager.h"
+#include "tileManager.h"
 #include "DxLib.h"
 
 int TileManager::m_TileHandle[TILE_MAX];
