@@ -2,6 +2,14 @@
 #include "Player/Player.h"
 #include "Input/Input.h"
 
+//マップ関連
+#include "map/manager/mapmanager.h"
+#include "map/tileManager/tileManager.h"
+#include "map/map.h"
+
+
+#include <stdio.h>
+
 int main()
 {
 	// DxLibの初期化
@@ -9,14 +17,32 @@ int main()
 	SetDrawScreen(DX_SCREEN_BACK);
 	Player player;
 	Input input;
-	while (true) {
+
+	// タイルロード
+	TileManager::LoadTiles("Data/Map/1985_tiles.png", 8, 8);
+
+	// マップロード
+	MapManager::Init();
+
+
+	while (true) 
+	{
 		input.Update();
 		if (input.IsKeyDown(KEY_INPUT_ESCAPE)) break;
 		player.Update(input);
+
+
 		ClearDrawScreen();
+
+		// マップ描画
+		MapManager::Draw();
+
 		player.Draw(0); // カメラ位置は0で固定
 		ScreenFlip();
 		input.LateUpdate();
+
+
+	
 	}
 	DxLib_End();
 	return 0;

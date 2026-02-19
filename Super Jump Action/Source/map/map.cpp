@@ -1,4 +1,5 @@
-#include "Map.h"
+#include "map.h"
+#include "tileManager/tileManager.h"
 #include <stdio.h>
 
 int g_Map[MAP_HEIGHT][MAP_WIDTH];
@@ -18,7 +19,9 @@ bool LoadMapCSV(const char* filename)
     {
         for (int x = 0; x < MAP_WIDTH; x++)
         {
-            fscanf_s(fp, "%d,", &g_Map[y][x]);
+            fscanf_s(fp, "%d", &g_Map[y][x]);
+
+            fgetc(fp); // ƒJƒ“ƒ} or ‰üs“Ç‚Ý”ò‚Î‚µ
         }
     }
 
@@ -26,3 +29,23 @@ bool LoadMapCSV(const char* filename)
 
     return true;
 }
+
+void DrawMap()
+{
+    for (int y = 0; y < MAP_HEIGHT; y++)
+    {
+        for (int x = 0; x < MAP_WIDTH; x++)
+        {
+            int id = g_Map[y][x];
+
+            if (id < 0) continue;
+
+            TileManager::DrawTile(
+                id,
+                x * TILE_SIZE,
+                y * TILE_SIZE
+            );
+        }
+    }
+}
+

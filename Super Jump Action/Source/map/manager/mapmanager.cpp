@@ -1,26 +1,33 @@
-#include "MapManager.h"
+#include "mapmanager.h"
 #include "../map.h"
+
+#include "DxLib.h"
 
 StageID MapManager::m_CurrentStage;
 
+
+//CSV“Ç‚İ‚İêŠ
 const char* StageFileName[STAGE_MAX] =
 {
-    "data/map/stage_tutoreal.csv",
-    "data/map/stage1.csv",
-    "data/map/stage2.csv",
-    "data/map/stage3.csv"
+    "data/map/CSV/stage_tutoreal.csv",
+    "data/map/CSV/stage1.csv",
+    "data/map/CSV/stage2.csv",
+    "data/map/CSV/stage3.csv"
 };
 
 void MapManager::Init()
 {
-    LoadStage(STAGE_1);
+    LoadStage(STAGE_tutoreal);
 }
 
 void MapManager::LoadStage(StageID stage)
 {
     m_CurrentStage = stage;
 
-    LoadMapCSV(StageFileName[stage]);
+    if (!LoadMapCSV(StageFileName[stage]))
+    {
+        printfDx("CSV Load Error: %s\n", StageFileName[stage]);
+    }
 }
 
 void MapManager::Draw()

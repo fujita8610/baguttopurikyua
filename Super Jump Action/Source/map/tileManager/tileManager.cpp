@@ -1,4 +1,4 @@
-#include "TileManager.h"
+#include "tileManager.h"
 #include "DxLib.h"
 
 int TileManager::m_TileHandle[TILE_MAX];
@@ -10,7 +10,7 @@ bool TileManager::LoadTiles(const char* filename, int tileSizeX, int tileSizeY)
     int AllNumX;
     int AllNumY;
 
-    int ImageHandle = LoadGraph("Data / Map / 1985_tiles.png");
+    int ImageHandle = LoadGraph("Data/Map/1985_tiles.png");
 
     if (ImageHandle == -1)
         return false;
@@ -25,7 +25,7 @@ bool TileManager::LoadTiles(const char* filename, int tileSizeX, int tileSizeY)
     m_TileNum = AllNumX * AllNumY;
 
     LoadDivGraph(
-        "Data / Map / 1985_tiles.png",
+        "Data/Map/1985_tiles.png",
         m_TileNum,
         AllNumX,
         AllNumY,
