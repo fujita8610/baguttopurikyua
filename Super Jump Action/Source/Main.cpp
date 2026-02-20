@@ -17,9 +17,7 @@ int main()
 	SetDrawScreen(DX_SCREEN_BACK);
 	Player player;
 
-	player.SetPosition(
-		g_PlayerStartX * TILE_SIZE * TileManager::GetScale(),
-		g_PlayerStartY * TILE_SIZE * TileManager::GetScale());
+
 	Input input;
 
 	// タイルロード
@@ -30,6 +28,11 @@ int main()
 
     // マップロード
 	MapManager::Init();
+
+	//プレイヤーの設置
+	player.SetPosition(
+		g_PlayerStartX * TILE_SIZE * TileManager::GetScale(),
+		g_PlayerStartY * TILE_SIZE * TileManager::GetScale());
 
 
 	while (true) 

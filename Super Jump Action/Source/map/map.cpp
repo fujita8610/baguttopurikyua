@@ -23,7 +23,7 @@ bool LoadMapCSV(const char* filename)
         return false;
     }
 
-    // ★BOMスキップ処理
+    // BOMスキップ
     unsigned char bom[3];
     fread(bom, 1, 3, fp);
 
@@ -36,15 +36,25 @@ bool LoadMapCSV(const char* filename)
     {
         for (int x = 0; x < MAP_WIDTH; x++)
         {
-            fscanf_s(fp, "%d,", &g_Map[y][x]);
+            if (fscanf_s(fp, "%d", &g_Map[y][x]) != 1)
+            {
+                printfDx("Read error y=%d x=%d\n", y, x);
+                fclose(fp);
+                return false;
+            }
 
             if (g_Map[y][x] == TILE_PLAYER_START)
             {
                 g_PlayerStartX = x;
                 g_PlayerStartY = y;
 
-                g_Map[y][x] = -1; // マップから消す（重要）
+                g_Map[y][x] = -1;
             }
+
+            // 区切り文字スキップ
+            int c = fgetc(fp);
+
+            if (c == '\r') fgetc(fp);
         }
     }
 
@@ -54,6 +64,10 @@ bool LoadMapCSV(const char* filename)
 
     return true;
 }
+
+
+
+
 void DrawMap()
 {
     float scale = TileManager::GetScale();
