@@ -16,6 +16,10 @@ int main()
 	if (DxLib_Init() == -1) return -1;
 	SetDrawScreen(DX_SCREEN_BACK);
 	Player player;
+
+	player.SetPosition(
+		g_PlayerStartX * TILE_SIZE * TileManager::GetScale(),
+		g_PlayerStartY * TILE_SIZE * TileManager::GetScale());
 	Input input;
 
 	// タイルロード

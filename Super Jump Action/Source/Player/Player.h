@@ -8,8 +8,12 @@ public:
     void Update(Input& input);
     void Draw(float camX);
 
+    //‰ŠúˆÊ’u
+    void SetPosition(float x, float y);
+
 private:
-    int x, y;
+    //ˆÊ’uÀ•W
+    VECTOR pos;
     int speed;
     int image;
 
