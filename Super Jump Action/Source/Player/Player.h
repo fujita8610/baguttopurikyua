@@ -17,6 +17,9 @@ private:
     int speed;
     int image;
 
+    int width = 32;   
+    int height = 32;
+
     float vy;
     float gravity;
     float jumpPower;
