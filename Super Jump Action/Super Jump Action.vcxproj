@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h" />
+    <ClInclude Include="Source\Config.h" />
     <ClInclude Include="Source\Graphics\SpriteSheet.h" />
     <ClInclude Include="Source\map\manager\mapmanager.h" />
     <ClInclude Include="Source\map\map.h" />
