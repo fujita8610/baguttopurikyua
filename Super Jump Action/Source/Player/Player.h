@@ -1,10 +1,13 @@
 #pragma once
 #include "DxLib.h"
 #include "../Input/Input.h"
+#include "../Graphics/SpriteSheet.h"
+#include "../Animation/Animation.h"
+
 class Player
 {
 public:
-	Player();
+    Player();
     void Update(Input& input);
     void Draw(float camX);
 
@@ -26,6 +29,12 @@ private:
 
     bool isGround;
     int jumpCount;
-    bool facingRight;
+
+    // アニメーション関連
+    SpriteSheet sprite;
+    Animation anim;
+    int totalFrames;
+    enum class State { Idle, Run, Jump } state;
+    bool useSpriteSheet;
 };
 
