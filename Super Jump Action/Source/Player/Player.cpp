@@ -103,8 +103,19 @@ void Player::Draw(float camX)
 	DrawGraph(drawX, drawY, image, TRUE);
 
 }
+
 void Player::SetPosition(float x, float y)
 {
 	pos.x = x;
 	pos.y = y;
+}
+
+float Player::GetX() const
+{
+	return pos.x;
+}
+
+float Player::GetY() const
+{
+	return pos.y;
 }

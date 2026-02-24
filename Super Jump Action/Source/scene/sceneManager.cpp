@@ -1,13 +1,9 @@
 #include "scenemanager.h"
 
-
 Scene* SceneManager::currentScene = nullptr;
-
-
 
 void SceneManager::ChangeScene(Scene* scene)
 {
-
     if (currentScene != nullptr)
     {
         currentScene->End();
@@ -15,9 +11,7 @@ void SceneManager::ChangeScene(Scene* scene)
         delete currentScene;
     }
 
-
     currentScene = scene;
-
     currentScene->Init();
 
 }
@@ -26,22 +20,18 @@ void SceneManager::ChangeScene(Scene* scene)
 
 void SceneManager::Update()
 {
-
     if (currentScene != nullptr)
     {
         currentScene->Update();
     }
-
 }
 
 
 
 void SceneManager::Draw()
 {
-
     if (currentScene != nullptr)
     {
         currentScene->Draw();
     }
-
 }

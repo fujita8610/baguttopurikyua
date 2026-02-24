@@ -1,13 +1,12 @@
 #include "DxLib.h"
 #include "Player/Player.h"
 #include "Input/Input.h"
+#include "Camera/Camera.h"
 
 //マップ関連
 #include "map/manager/mapmanager.h"
 #include "map/tileManager/tileManager.h"
 #include "map/map.h"
-
-
 #include <stdio.h>
 
 int main()
@@ -39,8 +38,9 @@ int main()
 	{
 		input.Update();
 		if (input.IsKeyDown(KEY_INPUT_ESCAPE)) break;
-		player.Update(input);
 
+		player.Update(input);
+		UpdateCamera(player.GetX(), player.GetY());
 
 		ClearDrawScreen();
 
@@ -50,9 +50,6 @@ int main()
 		player.Draw(0); // カメラ位置は0で固定
 		ScreenFlip();
 		input.LateUpdate();
-
-
-	
 	}
 	DxLib_End();
 	return 0;

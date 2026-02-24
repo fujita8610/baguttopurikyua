@@ -1,12 +1,16 @@
 #pragma once
 #include "DxLib.h"
 #include "../Input/Input.h"
+
 class Player
 {
 public:
 	Player();
     void Update(Input& input);
     void Draw(float camX);
+
+    float GetX() const;
+    float GetY() const;
 
     //‰ŠúˆÊ’u
     void SetPosition(float x, float y);
