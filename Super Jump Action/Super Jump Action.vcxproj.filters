@@ -13,6 +13,27 @@
     <Filter Include="Source\map\manager">
       <UniqueIdentifier>{0f145805-2946-4968-b931-2648860f1198}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\scene">
+      <UniqueIdentifier>{966e9874-c6dd-42c8-8160-03a4d363abef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\scene\title">
+      <UniqueIdentifier>{d231a919-651b-4fc9-a86f-2a8965c5013d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\scene\option">
+      <UniqueIdentifier>{399a188e-9ba6-4145-bd20-b0e13765e08e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\scene\play scene">
+      <UniqueIdentifier>{5ee5e699-e974-48ab-a358-974b878750cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\scene\shop">
+      <UniqueIdentifier>{21bea240-a045-4f54-8673-504bfea34a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\scene\gameover">
+      <UniqueIdentifier>{9fd01007-e524-4c3d-842b-4481dc6b9f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\scene\game clear">
+      <UniqueIdentifier>{b975dda9-c4c3-43ec-b5dd-803d9ce63ea6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -28,6 +49,9 @@
       <Filter>Source\map\manager</Filter>
     </ClCompile>
     <ClCompile Include="Source\map\tileManager\tileManager.cpp" />
+    <ClCompile Include="Source\scene\sceneManager.cpp">
+      <Filter>Source\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player\Player.h">
@@ -40,5 +64,7 @@
       <Filter>Source\map\manager</Filter>
     </ClInclude>
     <ClInclude Include="Source\map\tileManager\tileManager.h" />
+    <ClInclude Include="Source\scene\sceneManager.h" />
+    <ClInclude Include="Source\scene\scene.h" />
   </ItemGroup>
 </Project>
