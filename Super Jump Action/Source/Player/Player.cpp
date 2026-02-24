@@ -23,10 +23,10 @@ Player::Player()
     // スプライトシートを試して読み込む（失敗したら従来の単一画像にフォールバック）
     // divX は仮の分割数（横フレーム数）。必要に応じて調整してください。
     const char* sheetPath = "Data/Player/Sprites/IDLE.png";
-    const int divX = 4;
+    const int divX = 10;
     const int divY = 1;
 
-    if (sprite.Load(sheetPath, divX, divY, width, height))
+    if (sprite.Load(sheetPath, divX, divY, 96, 96))
     {
         totalFrames = sprite.GetTotal();
         if (totalFrames > 0)
@@ -35,12 +35,6 @@ Player::Player()
             // 全フレームをアニメーション対象にして開始（速度は状態毎に切替える）
             anim.Start(0, totalFrames - 1, 8, true);
         }
-    }
-
-    if (!useSpriteSheet)
-    {
-        // フォールバック：既存の単一画像読み込み
-        image = LoadGraph(TEXT("Data/Player/Sprites/IDLE.png"));
     }
 }
 
