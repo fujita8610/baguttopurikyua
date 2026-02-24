@@ -7,12 +7,16 @@
 extern int g_Map[MAP_HEIGHT][MAP_WIDTH];
 
 bool LoadMapCSV(const char* filename);
+bool IsWall(int mapX, int mapY);
 void DrawMap();
 
 #define TILE_SIZE 8
 
-
+//“–‚½‚è”»’è‚ğ‚Â“®‚­‚à‚Ì
 #define TILE_PLAYER_START 99
+
+
+//“–‚½‚è”»’è‚ğ‚Âƒ^ƒCƒ‹
 
 
 extern int g_PlayerStartX;

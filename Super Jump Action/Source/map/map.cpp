@@ -67,6 +67,63 @@ bool LoadMapCSV(const char* filename)
 
 
 
+//ƒ}ƒbƒv‚Ì“–‚½‚è”»’è
+bool IsWall(int mapX, int mapY)
+{
+    // ”ÍˆÍŠO‚Í•Çˆµ‚¢
+    if (mapX < 0 || mapY < 0 || mapX >= MAP_WIDTH || mapY >= MAP_HEIGHT)
+    {
+        return true;
+    }
+
+    if (mapX < 0 || mapY < 0 || mapX >= MAP_WIDTH || mapY >= MAP_HEIGHT)
+    {
+        return true;
+    }
+
+    int tile = g_Map[mapY][mapX];
+
+    // “–‚½‚è”»’è‚Â‚¯‚éƒ^ƒCƒ‹‚Í‚±‚±‚É‘‚­
+    //@—á@(tile == ƒ^ƒCƒ‹”Ô†) return true;
+    if (tile == -1) return false; // ‹ó
+
+
+    // 1985_tiles.png“à‚Ì“–‚½‚è”»’è
+    if (tile == 0) return true; // ’n–Ê’ƒF‚P
+    if (tile == 1) return true; // ’n–Ê’ƒF‚Q
+    if (tile == 3) return true; // ‚©‚½‚¢˜gƒAƒŠƒuƒƒbƒN
+    if (tile == 5) return true; // ’n–Ê’ƒFƒŒƒ“ƒK‚P
+    if (tile == 6) return true; // ’n–Ê’ƒFƒŒƒ“ƒK‚Q
+    if (tile == 7) return true; // ‚©‚½‚¢˜g–³‚µƒuƒƒbƒN–¾
+    if (tile == 8) return true; // “y•Ç‚P
+    if (tile == 9) return true; // “y•Ç‚Q
+    if (tile == 11) return true; // ‚©‚½‚¢˜gƒAƒŠƒuƒƒbƒNˆÃ
+    if (tile == 12) return true; // ’ƒF
+    if (tile == 13) return true; // ƒŒƒ“ƒK‚P
+    if (tile == 14) return true; // ƒŒƒ“ƒK‚Q
+    if (tile == 15) return true; // ‚©‚½‚¢˜g–³‚µƒuƒƒbƒNˆÃ
+    if (tile == 44) return true; // ‚©‚½‚¢˜gƒAƒŠƒuƒƒbƒNÂ–¾
+    if (tile == 45) return true; // ’n–ÊÂƒŒƒ“ƒK‚P
+    if (tile == 46) return true; // ’n–ÊÂƒŒƒ“ƒK‚Q
+    if (tile == 50) return true; // ‚©‚½‚¢ÂƒuƒƒbƒN
+    if (tile == 52) return true; // ‚©‚½‚¢˜gƒAƒŠƒuƒƒbƒNÂˆÃ
+    if (tile == 53) return true; // ÂƒŒƒ“ƒK‚P
+    if (tile == 54) return true; // ÂƒŒƒ“ƒK‚Q
+    if (tile == 56) return true; // Î’n–Ê‚P
+    if (tile == 57) return true; // Î’n–Ê‚Q
+    if (tile == 64) return true; // Î•Ç‚P
+    if (tile == 65) return true; // Î•Ç‚Q
+    if (tile == 68) return true; // ”’ƒŒƒ“ƒK’n–Ê‚P
+    if (tile == 69) return true; // ”’ƒŒƒ“ƒK’n–Ê‚Q
+    if (tile == 76) return true; // ”’ƒŒƒ“ƒK‚P
+    if (tile == 77) return true; // ”’ƒŒƒ“ƒK‚Q
+  
+
+
+
+    return false;
+}
+
 
 void DrawMap()
 {
