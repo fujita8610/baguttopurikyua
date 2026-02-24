@@ -13,6 +13,15 @@
     <Filter Include="Source\map\manager">
       <UniqueIdentifier>{0f145805-2946-4968-b931-2648860f1198}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Animation">
+      <UniqueIdentifier>{0ef02f77-be38-4642-b010-dee9098a43e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\map\tileManager">
+      <UniqueIdentifier>{fb581455-969f-4c1e-b395-798565527c8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics">
+      <UniqueIdentifier>{1f7a7aa1-857a-4a2d-b842-5938ecf07463}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -27,7 +36,15 @@
     <ClCompile Include="Source\map\manager\mapmanager.cpp">
       <Filter>Source\map\manager</Filter>
     </ClCompile>
-    <ClCompile Include="Source\map\tileManager\tileManager.cpp" />
+    <ClCompile Include="Source\map\tileManager\tileManager.cpp">
+      <Filter>Source\map\tileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Animation\Animation.cpp">
+      <Filter>Source\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\SpriteSheet.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player\Player.h">
@@ -39,6 +56,14 @@
     <ClInclude Include="Source\map\manager\mapmanager.h">
       <Filter>Source\map\manager</Filter>
     </ClInclude>
-    <ClInclude Include="Source\map\tileManager\tileManager.h" />
+    <ClInclude Include="Source\map\tileManager\tileManager.h">
+      <Filter>Source\map\tileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation\Animation.h">
+      <Filter>Source\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\SpriteSheet.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
