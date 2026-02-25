@@ -10,8 +10,12 @@
     <ClCompile Include="Source\Player\Player.cpp" />
     <ClCompile Include="Source\scene\sceneManager.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Source\scene\gameScene\gameScene.cpp" />
     <ClCompile Include="Source\scene\title\titleScene.cpp" />
+=======
+    <ClCompile Include="Source\Enemy\EnemyManager\EnemyManager.cpp" />
+>>>>>>> 49e96c8e0158f0c28641d1b262f75b33a40af52a
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h" />
@@ -24,7 +28,13 @@
     <ClInclude Include="Source\scene\sceneManager.h" />
     <ClInclude Include="Source\Config.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
+<<<<<<< HEAD
     <ClInclude Include="Source\scene\gameScene\gameScene.h" />
     <ClInclude Include="Source\scene\title\titleScene.h" />
+=======
+    <ClInclude Include="Source\Enemy\EnemyManager\EnemyManager.h" />
+    <ClInclude Include="Source\Enemy\EnemyBase\EnemyBase.h" />
+    <ClInclude Include="Source\Enemy\EnemyBase\BossBase.h" />
+>>>>>>> 49e96c8e0158f0c28641d1b262f75b33a40af52a
   </ItemGroup>
 </Project>
