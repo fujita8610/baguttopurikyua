@@ -1,7 +1,10 @@
 #include "map.h"
+#include "DxLib.h"
 #include "tileManager/tileManager.h"
 #include <stdio.h>
-#include "DxLib.h"
+
+//Debug‚Ì•\Ž¦
+#include "../GameDebug/GameDebug.h"
 
 int g_Map[MAP_HEIGHT][MAP_WIDTH];
 
@@ -142,8 +145,24 @@ void DrawMap()
                 (int)(x * TILE_SIZE * scale),
                 (int)(y * TILE_SIZE * scale)
             );
+
+
+            //“–‚½‚è”»’è‚Ì•\Ž¦
+            if (GameDebug::IsDebug())
+            {
+                DrawFormatString(
+                    x * TILE_SIZE * scale,
+                    y * TILE_SIZE * scale,
+                    GetColor(255, 255, 0),
+                    "%d",
+                    id);
+
+
+            }
         }
     }
+
+   
 }
 
 
