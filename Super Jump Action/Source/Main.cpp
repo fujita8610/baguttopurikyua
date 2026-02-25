@@ -9,6 +9,10 @@
 #include "map/map.h"
 #include <stdio.h>
 
+//ゲームデバッグ
+#include "../Source/GameDebug/GameDebug.h"
+
+
 int main()
 {
 	// DxLibの初期化
@@ -37,6 +41,7 @@ int main()
 	while (true) 
 	{
 		input.Update();
+		GameDebug::Update();
 		if (input.IsKeyDown(KEY_INPUT_ESCAPE)) break;
 
 		player.Update(input);

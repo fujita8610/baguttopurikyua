@@ -1,5 +1,8 @@
 #include "Player.h"
 
+//Debug表示
+#include "../GameDebug/GameDebug.h"
+
 //マップ関連
 #include "../map/map.h"
 #include "../map/tileManager/tileManager.h"
@@ -152,6 +155,8 @@ void Player::Draw(float camX)
     int drawX = (int)(pos.x - camX);
     int drawY = (int)pos.y;
 
+
+    //アニメーション
     if (useSpriteSheet)
     {
         int frame = anim.GetFrame();
@@ -161,7 +166,7 @@ void Player::Draw(float camX)
             DrawGraph(drawX, drawY, handle, TRUE);
             // 座標表示（スプライト描画の後に画面左上へ表示）
             DrawFormatString(10, 10, GetColor(255, 255, 255), TEXT("X:%d Y:%d"), (int)pos.x, (int)pos.y);
-            return;
+            
         }
     }
 
@@ -170,8 +175,23 @@ void Player::Draw(float camX)
         DrawGraph(drawX, drawY, image, TRUE);
     }
 
-    // 座標表示（フォールバック時も表示）
-    DrawFormatString(10, 10, GetColor(255, 255, 255), TEXT("X:%d Y:%d"), (int)pos.x, (int)pos.y);
+    // デバッグ表示
+    if (GameDebug::IsDebug())
+    {
+        //当たり判定の表示
+        DrawBox(
+            drawX,
+            drawY,
+            drawX + width,
+            drawY + height,
+            GetColor(255, 0, 0),
+            FALSE);
+
+        // 座標表示（フォールバック時も表示）
+        DrawFormatString(10, 10, GetColor(255, 255, 255), TEXT("X:%d Y:%d"), (int)pos.x, (int)pos.y);
+    }
+
+ 
 }
 
 void Player::SetPosition(float x, float y)
