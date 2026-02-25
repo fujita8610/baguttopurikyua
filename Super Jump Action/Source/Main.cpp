@@ -3,6 +3,10 @@
 #include "Input/Input.h"
 #include "Camera/Camera.h"
 
+#include "../Source/Enemy/EnemyManager/EnemyManager.h"
+#include "../Source/Enemy/MushroomReg/MushroomReg.h"
+
+
 //マップ関連
 #include "map/manager/mapmanager.h"
 #include "map/tileManager/tileManager.h"
@@ -33,8 +37,19 @@ int main()
 	MapManager::Init();
 
 	//プレイヤーの設置
-	player.SetPosition(5, 150);
+	player.SetPosition(5, 10);
 
+	//Enemyマネージャー
+	EnemyManager enemyManager;
+
+	// CSVからEnemy生成
+	for (int i = 0; i < g_EnemyCount; i++)
+	{
+		enemyManager.AddEnemyTile<MushroomReg>(
+			g_EnemyStartX[i],
+			g_EnemyStartY[i]
+		);
+	}
 
 	while (true) 
 	{
@@ -45,10 +60,15 @@ int main()
 		player.Update(input);
 		UpdateCamera(player.GetX(), player.GetY());
 
+		enemyManager.Update();
+
 		ClearDrawScreen();
 
 		// マップ描画
 		MapManager::Draw();
+
+
+		enemyManager.Draw();
 
 		player.Draw(0); // カメラ位置は0で固定
 		ScreenFlip();

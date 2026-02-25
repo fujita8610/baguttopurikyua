@@ -6,7 +6,7 @@ MushroomReg::MushroomReg(float startX, float startY)
     x = startX;
     y = startY;
 
-    sprite.Load("Mushroom_Reg.png", 10, 5, 32, 32);
+    sprite.Load("Data/Enemy/Enemy Mushrooms/Mushroom_Reg.png", 10, 5, 32, 32);
 
     int start = row * divX;
     int end = start + 9;

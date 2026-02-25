@@ -196,8 +196,11 @@ void Player::Draw(float camX)
 
 void Player::SetPosition(float x, float y)
 {
-    pos.x = x;
-    pos.y = y;
+    float scale = TileManager::GetScale();
+    float tileSize = TILE_SIZE * scale;
+
+    pos.x = x * tileSize;
+    pos.y = y * tileSize;
 }
 
 float Player::GetX() const
