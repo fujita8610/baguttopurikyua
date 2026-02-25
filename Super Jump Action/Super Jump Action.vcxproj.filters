@@ -10,6 +10,8 @@
     <ClCompile Include="Source\Player\Player.cpp" />
     <ClCompile Include="Source\scene\sceneManager.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
+    <ClCompile Include="Source\scene\gameScene\gameScene.cpp" />
+    <ClCompile Include="Source\scene\title\titleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h" />
@@ -22,5 +24,7 @@
     <ClInclude Include="Source\scene\sceneManager.h" />
     <ClInclude Include="Source\Config.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
+    <ClInclude Include="Source\scene\gameScene\gameScene.h" />
+    <ClInclude Include="Source\scene\title\titleScene.h" />
   </ItemGroup>
 </Project>
