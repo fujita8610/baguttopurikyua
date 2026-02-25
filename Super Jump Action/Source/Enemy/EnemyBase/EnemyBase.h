@@ -1,5 +1,13 @@
 #pragma once
 
+struct Rect
+{
+	float left;
+	float top;
+	float right;
+	float bottom;
+};
+
 class EnemyBase
 {
 public:
@@ -7,6 +15,9 @@ public:
 
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+
+	virtual Rect GetRect() const = 0;
+
 	virtual bool IsAlive() const { return isAlive; }
 
 protected:
