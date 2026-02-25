@@ -9,8 +9,8 @@
 
 Player::Player()
 {
-    pos.x = 100;
-    pos.y = 300;
+    pos.x = 5;
+    pos.y = 150;
     speed = 5;
     image = -1;
     vy = 0.0f;

@@ -33,9 +33,7 @@ int main()
 	MapManager::Init();
 
 	//プレイヤーの設置
-	player.SetPosition(
-		g_PlayerStartX * TILE_SIZE * TileManager::GetScale(),
-		g_PlayerStartY * TILE_SIZE * TileManager::GetScale());
+	player.SetPosition(5, 150);
 
 
 	while (true) 
