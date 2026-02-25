@@ -140,6 +140,9 @@ void DrawMap()
 
             if (id < 0) continue;
 
+            int drawX = (int)(x * TILE_SIZE * scale);
+            int drawY = (int)(y * TILE_SIZE * scale);
+
             TileManager::DrawTile(
                 id,
                 (int)(x * TILE_SIZE * scale),
@@ -150,13 +153,27 @@ void DrawMap()
             //当たり判定の表示
             if (GameDebug::IsDebug())
             {
+                // タイル番号
                 DrawFormatString(
                     x * TILE_SIZE * scale,
                     y * TILE_SIZE * scale,
+                    //黄色
                     GetColor(255, 255, 0),
                     "%d",
                     id);
 
+                // 当たり判定BOX
+                if (IsWall(x, y))
+                {
+                    DrawBox(
+                        drawX,
+                        drawY,
+                        drawX + TILE_SIZE * scale,
+                        drawY + TILE_SIZE * scale,
+                        //緑
+                        GetColor(0, 255, 0),
+                        FALSE);
+                }
 
             }
         }

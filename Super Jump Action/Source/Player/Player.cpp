@@ -166,7 +166,7 @@ void Player::Draw(float camX)
             DrawGraph(drawX, drawY, handle, TRUE);
             // 座標表示（スプライト描画の後に画面左上へ表示）
             DrawFormatString(10, 10, GetColor(255, 255, 255), TEXT("X:%d Y:%d"), (int)pos.x, (int)pos.y);
-            return;
+            
         }
     }
 
