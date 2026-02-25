@@ -1,5 +1,5 @@
 #include "DxLib.h"
-#include "../Config.h"
+#include "../System/Config.h"
 #include "Camera.h"
 #include "../Player/Player.h"
 

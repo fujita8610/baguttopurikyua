@@ -148,12 +148,14 @@
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
-    <ClInclude Include="Source\Config.h" />
+    <ClInclude Include="Source\System\Config.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\BossBase.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\EnemyBase.h" />
     <ClInclude Include="Source\Enemy\EnemyManager\EnemyManager.h" />
     <ClInclude Include="Source\GameDebug\GameDebug.h" />
     <ClInclude Include="Source\Graphics\SpriteSheet.h" />
+    <ClInclude Include="Source\System\cooldown.h" />
+    <ClInclude Include="Source\Input\Input.h" />
     <ClInclude Include="Source\map\manager\mapmanager.h" />
     <ClInclude Include="Source\map\map.h" />
     <ClInclude Include="Source\map\tileManager\tileManager.h" />
@@ -162,6 +164,7 @@
     <ClInclude Include="Source\scene\scene.h" />
     <ClInclude Include="Source\scene\sceneManager.h" />
     <ClInclude Include="Source\scene\title\titleScene.h" />
+    <ClInclude Include="Source\System\memo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

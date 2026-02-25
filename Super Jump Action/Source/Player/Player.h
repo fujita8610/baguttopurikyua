@@ -1,8 +1,18 @@
 #pragma once
 #include "DxLib.h"
+
+//入力
 #include "../Input/Input.h"
+#include "../System/cooldown.h"
+
+//アニメーション関連
 #include "../Graphics/SpriteSheet.h"
 #include "../Animation/Animation.h"
+
+//別 cpp/.h　からの宣言引用
+
+Cooldown jumpCooldown;
+
 class Player
 {
 public:
