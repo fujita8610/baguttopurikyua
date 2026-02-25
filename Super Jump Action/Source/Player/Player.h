@@ -9,9 +9,6 @@
 #include "../Graphics/SpriteSheet.h"
 #include "../Animation/Animation.h"
 
-//別 cpp/.h　からの宣言引用
-
-Cooldown jumpCooldown;
 
 class Player
 {
@@ -41,6 +38,9 @@ private:
 
     bool isGround;
     int jumpCount;
+
+    //別の cpp/.h での宣言引用
+    Cooldown jumpCooldown;
 
     // アニメーション関連
     SpriteSheet sprite;
