@@ -67,18 +67,48 @@ void Player::Update(Input& input)
 {
     //移動
     bool moving = false;
-    if (input.IsKeyDown(KEY_INPUT_A))
+    
+    // 左右キーの入力を個別にチェック
+    bool pressingLeft = input.IsKeyDown(KEY_INPUT_A);
+    bool pressingRight = input.IsKeyDown(KEY_INPUT_D);
+    
+    // 左キーが新しく押された場合
+    if (input.IsKeyDownTrigger(KEY_INPUT_A))
+    {
+        facingRight = false;
+    }
+    
+    // 右キーが新しく押された場合
+    if (input.IsKeyDownTrigger(KEY_INPUT_D))
+    {
+        facingRight = true;
+    }
+    
+    // 実際の移動処理
+    if (pressingLeft && !pressingRight)
     {
         pos.x -= speed;
         moving = true;
-        facingRight = false; // 左向き
+        facingRight = false;
     }
-
-    if (input.IsKeyDown(KEY_INPUT_D))
+    else if (pressingRight && !pressingLeft)
     {
         pos.x += speed;
         moving = true;
-        facingRight = true; // 右向き
+        facingRight = true;
+    }
+    else if (pressingLeft && pressingRight)
+    {
+        // 両方押されている場合は最後に押された方向に移動
+        if (facingRight)
+        {
+            pos.x += speed;
+        }
+        else
+        {
+            pos.x -= speed;
+        }
+        moving = true;
     }
 
     //ジャンプ
