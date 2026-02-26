@@ -20,6 +20,8 @@ public:
     float GetX() const;
     float GetY() const;
 
+    bool IsJumping() const;
+
     //‰ŠúˆÊ’u
     void SetPosition(float x, float y);
 

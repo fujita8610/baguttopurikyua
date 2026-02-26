@@ -15,11 +15,11 @@
     <ClCompile Include="Source\scene\title\titleScene.cpp" />
     <ClCompile Include="Source\GameDebug\GameDebug.cpp" />
     <ClCompile Include="Source\Enemy\MushroomReg\MushroomReg.cpp" />
+    <ClCompile Include="Source\Enemy\MushroomSpike\MushroomSpike.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
-    <ClInclude Include="Source\Config.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\BossBase.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\EnemyBase.h" />
     <ClInclude Include="Source\Enemy\EnemyManager\EnemyManager.h" />
@@ -34,5 +34,10 @@
     <ClInclude Include="Source\scene\title\titleScene.h" />
     <ClInclude Include="Source\GameDebug\GameDebug.h" />
     <ClInclude Include="Source\Enemy\MushroomReg\MushroomReg.h" />
+    <ClInclude Include="Source\System\Config.h" />
+    <ClInclude Include="Source\System\cooldown.h" />
+    <ClInclude Include="Source\Input\Input.h" />
+    <ClInclude Include="Source\System\memo.h" />
+    <ClInclude Include="Source\Enemy\MushroomSpike\MushroomSpike.h" />
   </ItemGroup>
 </Project>

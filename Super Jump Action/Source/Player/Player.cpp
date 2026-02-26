@@ -327,3 +327,8 @@ float Player::GetY() const
 {
 	return pos.y;
 }   
+
+bool Player::IsJumping() const
+{
+    return !isGround;
+}
