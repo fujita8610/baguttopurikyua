@@ -163,7 +163,7 @@ void Player::Draw(float camX)
         int handle = sprite.Get(frame);
         if (handle >= 0)
         {
-            DrawGraph(drawX, drawY, handle, TRUE);
+            DrawGraph(drawX - width, drawY - height -15, handle, TRUE);
             // 座標表示（スプライト描画の後に画面左上へ表示）
             DrawFormatString(10, 10, GetColor(255, 255, 255), TEXT("X:%d Y:%d"), (int)pos.x, (int)pos.y);
             

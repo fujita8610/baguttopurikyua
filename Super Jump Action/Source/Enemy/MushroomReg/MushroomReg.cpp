@@ -9,7 +9,7 @@ MushroomReg::MushroomReg(float startX, float startY)
     sprite.Load("Data/Enemy/Enemy Mushrooms/Mushroom_Reg.png", 10, 5, 32, 32);
 
     int start = row * divX;
-    int end = start + 9;
+    int end = start + 8;
 
     anim.Start(start, end, 5, true);
 }

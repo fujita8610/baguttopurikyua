@@ -37,7 +37,7 @@ int main()
 	MapManager::Init();
 
 	//プレイヤーの設置
-	player.SetPosition(5, 150);
+	player.SetPosition(1, 1);
 
 	//Enemyマネージャー
 	EnemyManager enemyManager;
