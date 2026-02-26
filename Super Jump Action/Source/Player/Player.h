@@ -39,14 +39,26 @@ private:
     bool isGround;
     int jumpCount;
 
-    //別の cpp/.h での宣言引用
+    //通常 cpp/.h での宣言を兼用
     Cooldown jumpCooldown;
 
     // アニメーション関連
-    SpriteSheet sprite;
+    SpriteSheet spriteIdle;   // Idle用
+    SpriteSheet spriteRun;    // Run用
+    SpriteSheet spriteJump;   // Jump用(上昇)
+    SpriteSheet spriteFall;   // Fall用(落下)
+    
     Animation anim;
-    int totalFrames;
-    enum class State { Idle, Run, Jump } state;
+    
+    int idleFrames;
+    int runFrames;
+    int jumpFrames;
+    int fallFrames;
+    
+    enum class State { Idle, Run, Jump, Fall } state;
     bool useSpriteSheet;
+
+    // 向き（true = 右向き、false = 左向き）
+    bool facingRight;
 };
 

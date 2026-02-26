@@ -11,7 +11,7 @@ Player::Player()
 {
     pos.x = 5;
     pos.y = 150;
-    speed = 5;
+    speed = 3;
     image = -1;
     vy = 0.0f;
     gravity = 0.5f;
@@ -20,23 +20,45 @@ Player::Player()
     jumpCount = 0;
 
     useSpriteSheet = false;
-    totalFrames = 0;
+    idleFrames = 0;
+    runFrames = 0;
+    jumpFrames = 0;
+    fallFrames = 0;
     state = State::Idle;
+    facingRight = true; // 初期状態は右向き
 
-    // スプライトシートを試して読み込む（失敗したら従来の単一画像にフォールバック）
-    // divX は仮の分割数（横フレーム数）。必要に応じて調整してください。
-    const char* sheetPath = "Data/Player/Sprites/IDLE.png";
-    const int divX = 10;
-    const int divY = 1;
-
-    if (sprite.Load(sheetPath, divX, divY, 96, 96))
+    // IDLE スプライトシート読み込み
+    if (spriteIdle.Load("Data/Player/Sprites/IDLE.png", 10, 1, 96, 96))
     {
-        totalFrames = sprite.GetTotal();
-        if (totalFrames > 0)
+        idleFrames = spriteIdle.GetTotal();
+    }
+
+    // RUN スプライトシート読み込み
+    if (spriteRun.Load("Data/Player/Sprites/RUN.png", 8, 1, 96, 96))
+    {
+        runFrames = spriteRun.GetTotal();
+    }
+
+    // JUMP スプライトシート読み込み(上昇)
+    if (spriteJump.Load("Data/Player/Sprites/JUMP.png", 3, 1, 96, 96))
+    {
+        jumpFrames = spriteJump.GetTotal();
+    }
+
+    // FALL スプライトシート読み込み(落下)
+    if (spriteFall.Load("Data/Player/Sprites/JUMP-FALL.png", 3, 1, 96, 96))
+    {
+        fallFrames = spriteFall.GetTotal();
+    }
+
+    // 少なくとも1つのスプライトが読み込めたら有効化
+    if (idleFrames > 0 || runFrames > 0 || jumpFrames > 0 || fallFrames > 0)
+    {
+        useSpriteSheet = true;
+        // 初期状態は Idle
+        if (idleFrames > 0)
         {
-            useSpriteSheet = true;
-            // 全フレームをアニメーション対象にして開始（速度は状態毎に切替える）
-            anim.Start(0, totalFrames - 1, 8, true);
+            anim.Start(0, idleFrames - 1, 8, true);
         }
     }
 }
@@ -49,12 +71,14 @@ void Player::Update(Input& input)
     {
         pos.x -= speed;
         moving = true;
+        facingRight = false; // 左向き
     }
 
     if (input.IsKeyDown(KEY_INPUT_D))
     {
         pos.x += speed;
         moving = true;
+        facingRight = true; // 右向き
     }
 
     //ジャンプ
@@ -115,7 +139,15 @@ void Player::Update(Input& input)
     State newState = State::Idle;
     if (!isGround)
     {
-        newState = State::Jump;
+        // 空中にいる時は速度で判定
+        if (vy < 0)
+        {
+            newState = State::Jump;  // 上昇中
+        }
+        else
+        {
+            newState = State::Fall;  // 落下中
+        }
     }
     else if (moving)
     {
@@ -126,7 +158,7 @@ void Player::Update(Input& input)
         newState = State::Idle;
     }
 
-    // 状態変化があればアニメーションを再設定（ここでは全フレーム範囲を使うが速度だけ変える）
+    // 状態変化があればアニメーションを再設定
     if (useSpriteSheet)
     {
         if (newState != state)
@@ -135,13 +167,28 @@ void Player::Update(Input& input)
             switch (state)
             {
             case State::Idle:
-                anim.Start(0, totalFrames - 1, 12, true); // ゆっくり
+                if (idleFrames > 0)
+                {
+                    anim.Start(0, idleFrames - 1, 8, true); // ゆっくり
+                }
                 break;
             case State::Run:
-                anim.Start(0, totalFrames - 1, 6, true);  // 早め
+                if (runFrames > 0)
+                {
+                    anim.Start(0, runFrames - 1, 4, true);  // 早め
+                }
                 break;
             case State::Jump:
-                anim.Start(0, totalFrames - 1, 10, true); // 中速
+                if (jumpFrames > 0)
+                {
+                    anim.Start(0, jumpFrames - 1, 6, false); // ループなし
+                }
+                break;
+            case State::Fall:
+                if (fallFrames > 0)
+                {
+                    anim.Start(0, fallFrames - 1, 6, false); // ループなし
+                }
                 break;
             }
         }
@@ -160,19 +207,57 @@ void Player::Draw(float camX)
     if (useSpriteSheet)
     {
         int frame = anim.GetFrame();
-        int handle = sprite.Get(frame);
+        int handle = -1;
+        
+        // 現在の状態に応じて適切なスプライトシートから取得
+        switch (state)
+        {
+        case State::Idle:
+            if (idleFrames > 0)
+                handle = spriteIdle.Get(frame);
+            break;
+        case State::Run:
+            if (runFrames > 0)
+                handle = spriteRun.Get(frame);
+            break;
+        case State::Jump:
+            if (jumpFrames > 0)
+                handle = spriteJump.Get(frame);
+            break;
+        case State::Fall:
+            if (fallFrames > 0)
+                handle = spriteFall.Get(frame);
+            break;
+        }
+        
         if (handle >= 0)
         {
-            DrawGraph(drawX - width, drawY - height -15, handle, TRUE);
+            // 向きに応じて反転描画
+            if (facingRight)
+            {
+                DrawGraph(drawX - width, drawY - height - 15, handle, TRUE);
+            }
+            else
+            {
+                // 左向き：DrawTurnGraph で左右反転
+                DrawTurnGraph(drawX - width, drawY - height - 15, handle, TRUE);
+            }
+            
             // 座標表示（スプライト描画の後に画面左上へ表示）
             DrawFormatString(10, 10, GetColor(255, 255, 255), TEXT("X:%d Y:%d"), (int)pos.x, (int)pos.y);
-            
         }
     }
 
     if (image >= 0)
     {
-        DrawGraph(drawX, drawY, image, TRUE);
+        if (facingRight)
+        {
+            DrawGraph(drawX, drawY, image, TRUE);
+        }
+        else
+        {
+            DrawTurnGraph(drawX, drawY, image, TRUE);
+        }
     }
 
     // デバッグ表示
@@ -211,4 +296,4 @@ float Player::GetX() const
 float Player::GetY() const
 {
 	return pos.y;
-}
+}   
