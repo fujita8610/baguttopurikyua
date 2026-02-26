@@ -33,17 +33,21 @@ void MushroomReg::Draw()
     int frame = anim.GetFrame();
     int handle = sprite.Get(frame);
 
-    double scaleX = (dir == 1) ? 1.0 : -1.0;
+    double exRate = 1.0;
+    double angle = 0.0;
 
-    DrawRotaGraph(
+    int turnFlag = (dir == -1) ? TRUE : FALSE;
+
+    DrawRotaGraph2(
         (int)x + 16,
         (int)y + 16,
-        1.0,
-        0.0,
+        16,              // íÜêSX
+        16,              // íÜêSY
+        exRate,
+        angle,
         handle,
         TRUE,
-        FALSE,
-        scaleX
+        turnFlag
     );
 }
 
