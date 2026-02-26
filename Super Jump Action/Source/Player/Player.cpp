@@ -227,11 +227,10 @@ void Player::Update(Input& input)
     }
 }
 
-void Player::Draw(float camX)
+void Player::Draw(float camX,float camY)
 {
     int drawX = (int)(pos.x - camX);
-    int drawY = (int)pos.y;
-
+    int drawY = (int)(pos.y - camY);
 
     //アニメーション
     if (useSpriteSheet)
@@ -262,15 +261,22 @@ void Player::Draw(float camX)
         
         if (handle >= 0)
         {
+
+            int spriteW = 96;
+            int spriteH = 96;
+
+            int spriteDrawX = drawX - (spriteW - width);
+            int spriteDrawY = drawY - (spriteH - height);
+
             // 向きに応じて反転描画
             if (facingRight)
             {
-                DrawGraph(drawX - width, drawY - height - 15, handle, TRUE);
+                DrawGraph(spriteDrawX + 30 , spriteDrawY + 15, handle, TRUE);
             }
             else
             {
                 // 左向き：DrawTurnGraph で左右反転
-                DrawTurnGraph(drawX - width, drawY - height - 15, handle, TRUE);
+                DrawTurnGraph(spriteDrawX, spriteDrawY, handle, TRUE);
             }
             
             // 座標表示（スプライト描画の後に画面左上へ表示）

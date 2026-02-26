@@ -11,7 +11,7 @@ class EnemyManager
 {
 public:
 	void Update();
-	void Draw();
+	void Draw(float camX, float camY);
 
 	void AddEnemy(std::unique_ptr<EnemyBase> enemy);
 

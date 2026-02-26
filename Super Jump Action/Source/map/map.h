@@ -8,7 +8,7 @@ extern int g_Map[MAP_HEIGHT][MAP_WIDTH];
 
 bool LoadMapCSV(const char* filename);
 bool IsWall(int mapX, int mapY);
-void DrawMap();
+void DrawMap(float camX, float camY);
 
 #define TILE_SIZE 8
 

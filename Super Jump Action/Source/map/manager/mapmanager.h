@@ -23,7 +23,7 @@ public:
 
     static void LoadStage(StageID stage);
 
-    static void Draw();
+    static void Draw(float camX, float camY);
 
     static StageID GetCurrentStage();
 

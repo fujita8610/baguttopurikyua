@@ -28,7 +28,7 @@ void MushroomReg::Update()
     anim.Update();
 }
 
-void MushroomReg::Draw()
+void MushroomReg::Draw(float camX, float camY)
 {
     int frame = anim.GetFrame();
     int handle = sprite.Get(frame);
@@ -36,11 +36,12 @@ void MushroomReg::Draw()
     double exRate = 1.0;
     double angle = 0.0;
 
+
     int turnFlag = (dir == -1) ? TRUE : FALSE;
 
     DrawRotaGraph2(
-        (int)x + 16,
-        (int)y + 16,
+        (int)(x - camX) + 16,
+        (int)(y - camY) + 16,
         16,              // íÜêSX
         16,              // íÜêSY
         exRate,

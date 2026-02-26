@@ -153,7 +153,7 @@ bool IsWall(int mapX, int mapY)
 }
 
 
-void DrawMap()
+void DrawMap(float camX, float camY)
 {
     float scale = TileManager::GetScale();
 
@@ -165,8 +165,8 @@ void DrawMap()
 
             if (id < 0) continue;
 
-            int drawX = (int)(x * TILE_SIZE * scale);
-            int drawY = (int)(y * TILE_SIZE * scale);
+            int drawX = x * TILE_SIZE * scale - camX;
+            int drawY = y * TILE_SIZE * scale - camY;
 
             TileManager::DrawTile(
                 id,

@@ -20,9 +20,18 @@ void GameScene::Init()
 
     // プレイヤー初期位置
     player.SetPosition(
-        g_PlayerStartX * TILE_SIZE * TileManager::GetScale(),
-        g_PlayerStartY * TILE_SIZE * TileManager::GetScale()
+        g_PlayerStartX,
+        g_PlayerStartY
     );
+
+    // CSVからEnemy生成
+    for (int i = 0; i < g_EnemyCount; i++)
+    {
+        enemyManager.AddEnemyTile<MushroomReg>(
+            g_EnemyStartX[i],
+            g_EnemyStartY[i]
+        );
+    }
 }
 
 void GameScene::Update()
@@ -35,15 +44,24 @@ void GameScene::Update()
         exit(0);
     }
 
+    //動くもの更新
     player.Update(input);
+    enemyManager.Update();
+
+    // カメラ更新
+    cameraX = player.GetX() - 640 / 2;
+    cameraY = player.GetY() - 360 / 2;
+    // マイナス防止
+    if (cameraX < 0) cameraX = 0;
+    if (cameraY < 0) cameraY = 0;
 }
 
 void GameScene::Draw()
 {
-    MapManager::Draw();
-    player.Draw(0);
+    DrawMap(cameraX, cameraY);
+    enemyManager.Draw(cameraX,cameraY);
+    player.Draw(cameraX, cameraY);
 }
-
 void GameScene::End()
 {
 }

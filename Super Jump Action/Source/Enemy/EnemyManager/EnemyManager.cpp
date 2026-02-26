@@ -21,12 +21,12 @@ void EnemyManager::Update()
                 );
 }
 
-void EnemyManager::Draw()
+void EnemyManager::Draw(float camX, float camY)
 {
     // ‘S“G‚Ì•`‰æ
     for (auto& enemy : enemies)
     {
-        enemy->Draw();
+        enemy->Draw(camX,camY);
     }
 }
 

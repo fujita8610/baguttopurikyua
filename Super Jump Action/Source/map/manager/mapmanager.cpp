@@ -30,9 +30,9 @@ void MapManager::LoadStage(StageID stage)
     }
 }
 
-void MapManager::Draw()
+void MapManager::Draw(float camX, float camY)
 {
-    DrawMap();
+    DrawMap(camX,camY);
 }
 
 StageID MapManager::GetCurrentStage()

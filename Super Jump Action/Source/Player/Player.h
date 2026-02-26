@@ -15,7 +15,7 @@ class Player
 public:
     Player();
     void Update(Input& input);
-    void Draw(float camX);
+    void Draw(float camX, float camY);
 
     float GetX() const;
     float GetY() const;
