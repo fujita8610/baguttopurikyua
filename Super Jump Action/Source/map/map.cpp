@@ -16,6 +16,7 @@ int g_PlayerStartY = 0;
 int g_EnemyStartX[ENEMY_MAX];
 int g_EnemyStartY[ENEMY_MAX];
 int g_EnemyCount = 0;
+int g_EnemyType[ENEMY_MAX];
 
 //マップのロード
 bool LoadMapCSV(const char* filename)
@@ -50,6 +51,7 @@ bool LoadMapCSV(const char* filename)
                 return false;
             }
 
+            //プレイヤー開始位置
             if (g_Map[y][x] == TILE_PLAYER_START)
             {
                 g_PlayerStartX = x;
@@ -59,10 +61,18 @@ bool LoadMapCSV(const char* filename)
             }
 
             // 敵開始位置
-            if (g_Map[y][x] == TILE_ENEMY1_START)
+            if (g_Map[y][x] == TILE_ENEMY1_START||
+                g_Map[y][x] == TILE_ENEMY2_START||
+                g_Map[y][x] == TILE_ENEMY3_START||
+                g_Map[y][x] == TILE_ENEMY4_START||
+                g_Map[y][x] == TILE_ENEMY5_START||
+                g_Map[y][x] == TILE_ENEMY6_START)
             {
                 g_EnemyStartX[g_EnemyCount] = x;
                 g_EnemyStartY[g_EnemyCount] = y;
+
+                // 種類保存
+                g_EnemyType[g_EnemyCount] = g_Map[y][x];
 
                 g_EnemyCount++;
 
