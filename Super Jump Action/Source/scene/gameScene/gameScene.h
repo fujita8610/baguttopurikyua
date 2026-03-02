@@ -1,6 +1,7 @@
 #pragma once
 #include "../scene.h"
 
+
 //プレイヤー関連
 #include "../../Player/Player.h"
 #include "../../Input/Input.h"
@@ -29,4 +30,6 @@ private:
     //camera座標
     float cameraX = 0;
     float cameraY = 0;
+
+  
 };
