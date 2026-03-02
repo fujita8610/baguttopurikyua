@@ -13,7 +13,7 @@ class EnemyBase
 public:
 	virtual ~EnemyBase() = default;
 
-	virtual void Update() = 0;
+	virtual void Update(bool playerIsJumping) = 0;
 	virtual void Draw(float camX, float camY) = 0;
 
 	virtual Rect GetRect() const = 0;

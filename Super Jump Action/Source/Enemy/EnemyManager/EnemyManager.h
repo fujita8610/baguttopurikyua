@@ -10,7 +10,7 @@ class EnemyBase;
 class EnemyManager
 {
 public:
-	void Update();
+	void Update(bool playerIsJumping);
 	void Draw(float camX, float camY);
 
 	void AddEnemy(std::unique_ptr<EnemyBase> enemy);

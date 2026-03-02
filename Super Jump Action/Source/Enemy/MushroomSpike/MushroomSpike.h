@@ -10,7 +10,7 @@ public:
     MushroomSpike(float startX, float startY);
 
     void Update(bool playerIsJumping);
-    void Draw() override;
+    void Draw(float camX, float camY) override;
     Rect GetRect() const override;
 
 private:

@@ -9,7 +9,7 @@ MushroomSpike::MushroomSpike(float startX, float startY)
     hp = 1;
 
     // スプライトシート読み込み
-    sprite.Load("Mushroom_spike.png", 10, 5, 32, 32);
+    sprite.Load("Data/Enemy/Enemy Mushrooms/Mushroom_spike.png", 10, 5, 32, 32);
 
     // 歩行アニメ（2列目・9枚)
     int walkStart = walkRow * divX;     // row1 → 10
@@ -49,7 +49,7 @@ void MushroomSpike::Update(bool playerIsJumping)
     }
 }
 
-void MushroomSpike::Draw()
+void MushroomSpike::Draw(float camX, float camY)
 {
     int frame;
 
@@ -63,8 +63,8 @@ void MushroomSpike::Draw()
     int turnFlag = (dir == -1) ? TRUE : FALSE;
 
     DrawRotaGraph2(
-        (int)x + 16,
-        (int)y + 16,
+        (int)(x - camX) + 16,
+        (int)(y - camY) + 16,
         16,
         16,
         1.0,

@@ -2,12 +2,12 @@
 #include "../EnemyBase/EnemyBase.h"
 #include <algorithm>
 
-void EnemyManager::Update()
+void EnemyManager::Update(bool playerIsJumping)
 {
     // ‘S“G‚ÌXV
     for (auto& enemy : enemies)
     {
-        enemy->Update();
+        enemy->Update(playerIsJumping);
     }
 
     // €–S‚µ‚½“G‚ğíœ

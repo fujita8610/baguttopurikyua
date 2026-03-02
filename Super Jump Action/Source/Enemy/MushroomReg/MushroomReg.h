@@ -8,7 +8,7 @@ class MushroomReg : public EnemyBase
 public:
     MushroomReg(float startX, float startY);
 
-    void Update() override;
+    void Update(bool playerIsJumping) override;
     void Draw(float camX, float camY) override;
     Rect GetRect() const override;
 

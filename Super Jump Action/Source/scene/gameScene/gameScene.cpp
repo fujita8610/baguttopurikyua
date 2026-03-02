@@ -27,10 +27,23 @@ void GameScene::Init()
     // CSVからEnemy生成
     for (int i = 0; i < g_EnemyCount; i++)
     {
-        enemyManager.AddEnemyTile<MushroomReg>(
-            g_EnemyStartX[i],
-            g_EnemyStartY[i]
-        );
+        switch (g_EnemyType[i])
+        {
+        case TILE_ENEMY1_START:   // 97
+            enemyManager.AddEnemyTile<MushroomReg>(
+                g_EnemyStartX[i],
+                g_EnemyStartY[i]
+            );
+            break;
+
+        case TILE_ENEMY2_START:   // 96
+            enemyManager.AddEnemyTile<MushroomSpike>(
+                g_EnemyStartX[i],
+                g_EnemyStartY[i]
+            );
+            break;
+        }
+
     }
 }
 
@@ -46,7 +59,7 @@ void GameScene::Update()
 
     //動くもの更新
     player.Update(input);
-    enemyManager.Update();
+    enemyManager.Update(player.IsJumping());
 
     // カメラ更新
     cameraX = player.GetX() - 640 / 2;

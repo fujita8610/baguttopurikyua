@@ -9,6 +9,7 @@
 //EnemyŠÖ˜A
 #include "../../Enemy/EnemyManager/EnemyManager.h"
 #include "../../Enemy/MushroomReg/MushroomReg.h"
+#include "../../Enemy/MushroomSpike/MushroomSpike.h"
 
 class GameScene : public Scene
 {
