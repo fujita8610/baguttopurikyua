@@ -1,21 +1,19 @@
 #include "GameDebug.h"
 #include "DxLib.h"
+#include "../Input/Input.h"
 
 bool GameDebug::debug = false;
-Cooldown GameDebug::toggleCooldown;
 
-void GameDebug::Update()
+void GameDebug::Update(Input& input)
 {
-    //クールダウンを追加
-    toggleCooldown.Set(20);
-    toggleCooldown.Update();
-
-    //F1でデバッグの表示
-    if (CheckHitKey(KEY_INPUT_F1))
+    //F1でデバックを表示
+    if (input.IsKeyDownTrigger(KEY_INPUT_F1))
     {
         debug = !debug;
     }
 }
+
+
 
 bool GameDebug::IsDebug()
 {

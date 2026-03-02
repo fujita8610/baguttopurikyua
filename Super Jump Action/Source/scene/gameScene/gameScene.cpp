@@ -50,6 +50,8 @@ void GameScene::Init()
 void GameScene::Update()
 {
     input.Update();
+    GameDebug::Update(input);
+
 
     if (input.IsKeyDown(KEY_INPUT_ESCAPE))
     {

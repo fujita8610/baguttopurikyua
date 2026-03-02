@@ -21,9 +21,6 @@ int main()
     // メインループ
     while (ProcessMessage() == 0)
     {
-        // Debug更新
-        GameDebug::Update();
-
         // 更新
         SceneManager::Update();
 

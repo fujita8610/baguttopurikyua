@@ -8,7 +8,7 @@ class GameDebug
 {
 public:
 
-    static void Update();
+    static void Update(Input& input);
 
     static bool IsDebug();
 

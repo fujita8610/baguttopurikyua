@@ -12,6 +12,9 @@
 #include "../../Enemy/MushroomReg/MushroomReg.h"
 #include "../../Enemy/MushroomSpike/MushroomSpike.h"
 
+//ƒV[ƒ“ŠÖ˜A
+#include "../../GameDebug/GameDebug.h"
+
 class GameScene : public Scene
 {
 public:
