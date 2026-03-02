@@ -168,12 +168,7 @@ void DrawMap(float camX, float camY)
             int drawX = x * TILE_SIZE * scale - camX;
             int drawY = y * TILE_SIZE * scale - camY;
 
-            TileManager::DrawTile(
-                id,
-                (int)(x * TILE_SIZE * scale),
-                (int)(y * TILE_SIZE * scale)
-            );
-
+            TileManager::DrawTile(id, drawX, drawY);
 
             //“–‚½‚è”»’è‚Ì•\Ž¦
             if (GameDebug::IsDebug())
