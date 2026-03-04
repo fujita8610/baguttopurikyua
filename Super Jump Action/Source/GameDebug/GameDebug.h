@@ -3,6 +3,7 @@
 //システム関連
 #include "../System/cooldown.h"
 
+class Input;
 
 class GameDebug
 {
