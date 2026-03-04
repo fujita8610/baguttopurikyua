@@ -276,7 +276,7 @@ void Player::Draw(float camX,float camY)
             else
             {
                 // 左向き：DrawTurnGraph で左右反転
-                DrawTurnGraph(spriteDrawX, spriteDrawY, handle, TRUE);
+                DrawTurnGraph(spriteDrawX + 30, spriteDrawY + 15, handle, TRUE);
             }
             
             // 座標表示（スプライト描画の後に画面左上へ表示）
