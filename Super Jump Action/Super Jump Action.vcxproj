@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Animation\Animation.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
+    <ClCompile Include="Source\Enemy\BossEnemy\tutorialBoss\tutorialBoss.cpp" />
     <ClCompile Include="Source\Enemy\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="Source\Enemy\MushroomReg\MushroomReg.cpp" />
     <ClCompile Include="Source\Enemy\MushroomSpike\MushroomSpike.cpp" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
+    <ClInclude Include="Source\Enemy\BossEnemy\tutorialBoss\tutorialBoss.h" />
     <ClInclude Include="Source\Enemy\MushroomReg\MushroomReg.h" />
     <ClInclude Include="Source\Enemy\MushroomSpike\MushroomSpike.h" />
     <ClInclude Include="Source\System\Config.h" />

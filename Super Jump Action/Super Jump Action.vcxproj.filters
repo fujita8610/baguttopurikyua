@@ -16,6 +16,7 @@
     <ClCompile Include="Source\GameDebug\GameDebug.cpp" />
     <ClCompile Include="Source\Enemy\MushroomReg\MushroomReg.cpp" />
     <ClCompile Include="Source\Enemy\MushroomSpike\MushroomSpike.cpp" />
+    <ClCompile Include="Source\Enemy\BossEnemy\tutorialBoss\tutorialBoss.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h" />
@@ -39,5 +40,6 @@
     <ClInclude Include="Source\Input\Input.h" />
     <ClInclude Include="Source\System\memo.h" />
     <ClInclude Include="Source\Enemy\MushroomSpike\MushroomSpike.h" />
+    <ClInclude Include="Source\Enemy\BossEnemy\tutorialBoss\tutorialBoss.h" />
   </ItemGroup>
 </Project>

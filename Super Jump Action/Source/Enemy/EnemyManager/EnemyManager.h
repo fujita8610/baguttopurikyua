@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include "../../Player/Player.h"
 
 //マップ関連
 #include "../../map/tileManager/tileManager.h"
@@ -10,7 +11,7 @@ class EnemyBase;
 class EnemyManager
 {
 public:
-	void Update(bool playerIsJumping);
+	void Update(const Player& player);
 	void Draw(float camX, float camY);
 
 	void AddEnemy(std::unique_ptr<EnemyBase> enemy);

@@ -1,4 +1,5 @@
 #pragma once
+#include "../../Player/Player.h"
 
 struct Rect
 {
@@ -13,7 +14,7 @@ class EnemyBase
 public:
 	virtual ~EnemyBase() = default;
 
-	virtual void Update(bool playerIsJumping) = 0;
+	virtual void Update(const Player& player) = 0;
 	virtual void Draw(float camX, float camY) = 0;
 
 	virtual Rect GetRect() const = 0;

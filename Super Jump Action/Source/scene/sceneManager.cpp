@@ -16,8 +16,6 @@ void SceneManager::ChangeScene(Scene* scene)
 
 }
 
-
-
 void SceneManager::Update()
 {
     if (currentScene != nullptr)
@@ -25,8 +23,6 @@ void SceneManager::Update()
         currentScene->Update();
     }
 }
-
-
 
 void SceneManager::Draw()
 {

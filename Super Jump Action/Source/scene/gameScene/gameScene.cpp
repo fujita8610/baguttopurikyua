@@ -61,7 +61,7 @@ void GameScene::Update()
 
     //動くもの更新
     player.Update(input);
-    enemyManager.Update(player.IsJumping());
+    enemyManager.Update(player);
 
     // カメラ更新
     cameraX = player.GetX() - 640 / 2;

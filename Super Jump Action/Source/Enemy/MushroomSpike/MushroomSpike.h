@@ -9,7 +9,7 @@ class MushroomSpike : public EnemyBase
 public:
     MushroomSpike(float startX, float startY);
 
-    void Update(bool playerIsJumping);
+    void Update(const Player& player);
     void Draw(float camX, float camY) override;
     Rect GetRect() const override;
 
