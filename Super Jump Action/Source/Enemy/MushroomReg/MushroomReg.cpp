@@ -14,7 +14,7 @@ MushroomReg::MushroomReg(float startX, float startY)
     anim.Start(start, end, 5, true);
 }
 
-void MushroomReg::Update(bool playerIsJumping)
+void MushroomReg::Update(const Player& player)
 {
     x += speed * dir;
 

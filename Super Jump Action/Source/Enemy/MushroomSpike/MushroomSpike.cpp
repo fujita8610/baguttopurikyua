@@ -24,9 +24,9 @@ MushroomSpike::MushroomSpike(float startX, float startY)
     spikeAnim.Start(spikeStart, spikeEnd, 4, true);
 }
 
-void MushroomSpike::Update(bool playerIsJumping)
+void MushroomSpike::Update(const Player& player)
 {
-    spikeActive = playerIsJumping;
+    spikeActive = player.IsJumping();
 
     if (!spikeActive)
     {
