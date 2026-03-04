@@ -18,3 +18,5 @@ private:
     static bool debug;
     static Cooldown toggleCooldown;
 };
+
+extern GameDebug;

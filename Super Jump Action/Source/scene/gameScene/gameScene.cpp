@@ -69,6 +69,9 @@ void GameScene::Update()
     // マイナス防止
     if (cameraX < 0) cameraX = 0;
     if (cameraY < 0) cameraY = 0;
+
+    //クールダウン
+    input.LateUpdate();
 }
 
 void GameScene::Draw()

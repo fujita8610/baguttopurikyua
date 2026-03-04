@@ -2,6 +2,7 @@
 #include "../scene.h"
 #include "../../Input/Input.h"
 
+
 class TitleScene : public Scene
 {
 
@@ -13,4 +14,13 @@ class TitleScene : public Scene
 
     private:
         Input input;
+
+
+        //画像ハンドル
+        int titleFrameHandle = -1;
+        int selectBarHandle = -1;
+
+
+        int cursor = 0;   // 選択位置
+        static const int MENU_MAX = 4; //選択母数
 };
