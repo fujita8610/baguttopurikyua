@@ -23,4 +23,7 @@ class TitleScene : public Scene
 
         int cursor = 0;   // 選択位置
         static const int MENU_MAX = 4; //選択母数
+
+        //タイマー
+        int blinkTimer = 0;
 };
