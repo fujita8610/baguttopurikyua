@@ -19,6 +19,8 @@ void TitleScene::Update()
 {
     input.Update();
 
+    blinkTimer++;   // 点滅用タイマー
+
     // ↓キー
     if (input.IsKeyDownTrigger(KEY_INPUT_DOWN))
     {
@@ -73,8 +75,15 @@ void TitleScene::Draw()
         "EXIT"
     };
 
-    int baseX = 200;
-    int baseY = 250;
+    int baseX = 400;
+    int baseY = 280;
+
+
+
+    // 点滅用カラー
+    float t = sin(blinkTimer * 0.1f);
+    int brightness = 120 + (int)(t * 60);
+    int blinkColor = GetColor(brightness, brightness, brightness);
 
     for (int i = 0; i < MENU_MAX; i++)
     {
@@ -83,8 +92,19 @@ void TitleScene::Draw()
         if (i == cursor)
         {
             // 選択バー画像
-            DrawGraph(baseX - 40, y - 10, selectBarHandle, TRUE);
-            DrawString(baseX, y, menu[i], GetColor(255, 255, 0));
+            DrawRotaGraph(
+                baseX + 80,   // 中心X
+                y + 10,       // 中心Y
+                0.5,          // ← 半分サイズ
+                0.0,
+                selectBarHandle,
+                TRUE
+            );
+\
+
+            //セレクト中は点滅
+            DrawString(baseX, y, menu[i],brightness);
+
         }
         else
         {
