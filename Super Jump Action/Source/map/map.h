@@ -1,8 +1,8 @@
 #pragma once
 
-//マップ関連
-#define MAP_WIDTH  26
-#define MAP_HEIGHT 8
+//マップの縦横
+#define MAP_WIDTH  100
+#define MAP_HEIGHT 100
 
 extern int g_Map[MAP_HEIGHT][MAP_WIDTH];
 
@@ -11,6 +11,12 @@ bool IsWall(int mapX, int mapY);
 void DrawMap(float camX, float camY);
 
 #define TILE_SIZE 8
+
+// 空白タイル
+#define TILE_EMPTY -1
+
+//透明ブロック
+#define TILE_INVINSIBLE -2
 
 //プレイヤー関連
 //マップ番号99　プレイヤー

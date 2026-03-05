@@ -104,10 +104,6 @@ bool IsWall(int mapX, int mapY)
         return true;
     }
 
-    if (mapX < 0 || mapY < 0 || mapX >= MAP_WIDTH || mapY >= MAP_HEIGHT)
-    {
-        return true;
-    }
 
     int tile = g_Map[mapY][mapX];
 
@@ -115,6 +111,8 @@ bool IsWall(int mapX, int mapY)
     //　例　(tile == タイル番号) return true;
     if (tile == -1) return false; // 空
 
+    //当たり判定
+    if (tile == -2) return true; // 透明ブロック
 
     // 1985_tiles.png内の当たり判定
     if (tile == 0) return true; // 地面茶色１
@@ -163,7 +161,8 @@ void DrawMap(float camX, float camY)
         {
             int id = g_Map[y][x];
 
-            if (id < 0) continue;
+            //空白
+            if (id == TILE_EMPTY || id == -2) continue;
 
             int drawX = x * TILE_SIZE * scale - camX;
             int drawY = y * TILE_SIZE * scale - camY;
