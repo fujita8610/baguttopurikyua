@@ -34,3 +34,20 @@ void EnemyManager::AddEnemy(std::unique_ptr<EnemyBase> enemy)
 {
     enemies.push_back(std::move(enemy));
 }
+
+Rect EnemyBase::GetRect() const
+{
+    Rect r;
+
+    int hitWidth = 40;
+    int hitHeight = 40;
+
+    r.left = (int)x - hitWidth / 2;
+    r.right = (int)x + hitWidth / 2;
+
+    // è≠Çµâ∫Ç…Ç∏ÇÁÇ∑
+    r.top = (int)y - hitHeight / 2 + 20;
+    r.bottom = (int)y + hitHeight / 2 + 20;
+
+    return r;
+}

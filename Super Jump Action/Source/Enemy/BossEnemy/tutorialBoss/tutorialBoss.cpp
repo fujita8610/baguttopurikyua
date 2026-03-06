@@ -1,6 +1,9 @@
 #include "TutorialBoss.h"
 #include "DxLib.h"
 
+//デバック
+#include "../../../GameDebug/GameDebug.h"
+
 TutorialBoss::TutorialBoss(float startX, float startY)
     : BossBase(startX, startY, 20)
 {
@@ -210,6 +213,20 @@ void TutorialBoss::Draw(float camX, float camY)
         DrawTurnGraph(drawX, drawY, handle, TRUE);
     else
         DrawGraph(drawX, drawY, handle, TRUE);
+
+    if (GameDebug::IsDebug())
+    {
+        Rect r = GetRect();
+
+        DrawBox(
+            (int)(r.left - camX),
+            (int)(r.top - camY),
+            (int)(r.right - camX),
+            (int)(r.bottom - camY),
+            GetColor(255, 0, 0),
+            FALSE
+        );
+    }
 }
 
 Rect TutorialBoss::GetRect() const

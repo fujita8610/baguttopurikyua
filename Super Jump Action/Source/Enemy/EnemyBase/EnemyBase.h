@@ -17,13 +17,21 @@ public:
 	virtual void Update(const Player& player) = 0;
 	virtual void Draw(float camX, float camY) = 0;
 
-	virtual Rect GetRect() const = 0;
+	virtual Rect GetRect() const;
 
 	virtual bool IsAlive() const { return isAlive; }
 
 protected:
 	float x = 0.0f;
 	float y = 0.0f;
+
+	float scale = 2.0f;
+
+	int width = 32;
+	int height = 32;
+
+	int hitWidth = 32;
+	int hitHeight = 48;
 
 	int hp = 1;
 	bool isAlive = true;

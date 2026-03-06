@@ -3,6 +3,9 @@
 #include "../../Animation/Animation.h"
 #include "../../Graphics/SpriteSheet.h"
 
+//
+#include "../../GameDebug/GameDebug.h"
+
 class MushroomReg : public EnemyBase
 {
 public:
@@ -21,4 +24,12 @@ private:
 
     float speed = 2.0f;
     int dir = 1;
+
+    float scale = 2.0f;
+
+    int width = 32;
+    int height = 32;
+
+    int hitWidth = 28;
+    int hitHeight = 28;
 };

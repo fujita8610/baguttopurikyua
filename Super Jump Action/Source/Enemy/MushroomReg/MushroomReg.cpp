@@ -33,15 +33,19 @@ void MushroomReg::Draw(float camX, float camY)
     int frame = anim.GetFrame();
     int handle = sprite.Get(frame);
 
-    double exRate = 1.0;
+    double exRate = scale;
     double angle = 0.0;
 
 
     int turnFlag = (dir == -1) ? TRUE : FALSE;
 
+    int drawX = (int)(x - camX);
+    int drawY = (int)(y - camY);
+
+
     DrawRotaGraph2(
-        (int)(x - camX) + 16,
-        (int)(y - camY) + 16,
+        drawX + 16,
+        drawY,
         16,              // 中心X
         16,              // 中心Y
         exRate,
@@ -50,6 +54,21 @@ void MushroomReg::Draw(float camX, float camY)
         TRUE,
         turnFlag
     );
+
+    // デバッグ当たり判定
+    if (GameDebug::IsDebug())
+    {
+        Rect r = GetRect();
+
+        DrawBox(
+            (int)(r.left - camX),
+            (int)(r.top - camY),
+            (int)(r.right - camX),
+            (int)(r.bottom - camY),
+            GetColor(255, 0, 0),
+            FALSE
+        );
+    }
 }
 
 Rect MushroomReg::GetRect() const
@@ -57,7 +76,7 @@ Rect MushroomReg::GetRect() const
     return {
         x,
         y,
-        x + 32,
-        y + 32
+        x + hitWidth,
+        y + hitHeight
     };
 }
