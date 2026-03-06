@@ -18,6 +18,11 @@ int g_EnemyStartY[ENEMY_MAX];
 int g_EnemyCount = 0;
 int g_EnemyType[ENEMY_MAX];
 
+//Boss
+int g_BossStartX = -1;
+int g_BossStartY = -1;
+bool g_BossExist = false;
+
 //マップのロード
 bool LoadMapCSV(const char* filename)
 {
@@ -75,6 +80,17 @@ bool LoadMapCSV(const char* filename)
                 g_EnemyType[g_EnemyCount] = g_Map[y][x];
 
                 g_EnemyCount++;
+
+                g_Map[y][x] = -1;
+            }
+
+            // ボス開始位置
+            if (g_Map[y][x] == TILE_TUTORIAL_BOSS)
+            {
+                g_BossStartX = x;
+                g_BossStartY = y;
+
+                g_BossExist = true;
 
                 g_Map[y][x] = -1;
             }

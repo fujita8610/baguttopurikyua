@@ -52,3 +52,14 @@ extern int g_EnemyStartY[ENEMY_MAX];
 extern int g_EnemyCount;
 extern int g_EnemyType[ENEMY_MAX];
 
+//ボス関連
+
+//マップ番号９９９　チュートリアルボス
+#define TILE_TUTORIAL_BOSS 999
+
+extern int g_BossStartX;
+extern int g_BossStartY;
+extern bool g_BossExist;
+
+
+

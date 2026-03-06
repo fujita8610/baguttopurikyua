@@ -48,6 +48,15 @@ void GameScene::Init()
         }
 
     }
+
+    //ボスの生成
+    if (g_BossExist)
+    {
+        boss = new TutorialBoss(
+            g_BossStartX * TILE_SIZE * TileManager::GetScale(),
+            g_BossStartY * TILE_SIZE * TileManager::GetScale()
+        );
+    }
 }
 
 void GameScene::Update()
@@ -65,6 +74,7 @@ void GameScene::Update()
     //動くもの更新
     player.Update(input);
     enemyManager.Update(player);
+    if (boss) {boss->Update(player);}
 
     // カメラ更新
     cameraX = player.GetX() - 640 / 2;
@@ -82,6 +92,8 @@ void GameScene::Draw()
     DrawMap(cameraX, cameraY);
     enemyManager.Draw(cameraX,cameraY);
     player.Draw(cameraX, cameraY);
+    if (boss)
+    {boss->Draw(cameraX, cameraY);}
 }
 void GameScene::End()
 {

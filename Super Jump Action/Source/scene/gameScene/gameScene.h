@@ -12,6 +12,9 @@
 #include "../../Enemy/MushroomReg/MushroomReg.h"
 #include "../../Enemy/MushroomSpike/MushroomSpike.h"
 
+//BOSS関連
+#include "../../Enemy/BossEnemy/tutorialBoss/tutorialBoss.h"
+
 //シーン関連
 #include "../../GameDebug/GameDebug.h"
 
@@ -29,6 +32,7 @@ private:
     Player player;
     Input input;
     EnemyManager enemyManager;
+    TutorialBoss* boss = nullptr;
 
     //camera座標
     float cameraX = 0;
