@@ -19,6 +19,13 @@ Player::Player()
     isGround = false;
     jumpCount = 0;
 
+    scale = 2.0f;
+    width = 32;
+    height = 32;
+
+    hitWidth = 32;
+    hitHeight = 48;
+
     useSpriteSheet = false;
     idleFrames = 0;
     runFrames = 0;
@@ -138,10 +145,10 @@ void Player::Update(Input& input)
         (int)(pos.x / tileSize);
 
     int rightTile =
-        (int)((pos.x + width - 1) / tileSize);
+        (int)((pos.x + hitWidth - 1) / tileSize);
 
     int bottomTile =
-        (int)((nextY + height) / tileSize);
+        (int)((nextY + hitHeight) / tileSize);
 
     //================
     // ínñ îªíË
@@ -151,7 +158,7 @@ void Player::Update(Input& input)
         (IsWall(leftTile, bottomTile) ||
             IsWall(rightTile, bottomTile)))
     {
-        pos.y = bottomTile * tileSize - height;
+        pos.y = bottomTile * tileSize - hitHeight;
         vy = 0;
         isGround = true;
         jumpCount = 0;
@@ -268,16 +275,16 @@ void Player::Draw(float camX,float camY)
             int spriteDrawX = drawX - (spriteW - width);
             int spriteDrawY = drawY - (spriteH - height);
 
-            // å¸Ç´Ç…âûÇ∂ÇƒîΩì]ï`âÊ
-            if (facingRight)
-            {
-                DrawGraph(spriteDrawX + 30 , spriteDrawY + 15, handle, TRUE);
-            }
-            else
-            {
-                // ç∂å¸Ç´ÅFDrawTurnGraph Ç≈ç∂âEîΩì]
-                DrawTurnGraph(spriteDrawX + 30, spriteDrawY + 15, handle, TRUE);
-            }
+            DrawRotaGraph(
+                spriteDrawX + 80,
+                spriteDrawY + 60,
+                scale,      // Å© î{ó¶
+                0.0,        // âÒì]
+                handle,
+                TRUE,
+                !facingRight // ç∂å¸Ç´Ç»ÇÁîΩì]
+            );
+
             
             // ç¿ïWï\é¶ÅiÉXÉvÉâÉCÉgï`âÊÇÃå„Ç…âÊñ ç∂è„Ç÷ï\é¶Åj
             DrawFormatString(10, 10, GetColor(255, 255, 255), TEXT("X:%d Y:%d"), (int)pos.x, (int)pos.y);
@@ -303,8 +310,8 @@ void Player::Draw(float camX,float camY)
         DrawBox(
             drawX,
             drawY,
-            drawX + width,
-            drawY + height,
+            drawX + hitWidth,
+            drawY + hitHeight,
             GetColor(255, 0, 0),
             FALSE);
 
@@ -337,4 +344,10 @@ float Player::GetY() const
 bool Player::IsJumping() const
 {
     return !isGround;
+}
+
+//î{ó¶ïœêî
+void Player:: SetScale(float s)
+{
+    scale = s;
 }

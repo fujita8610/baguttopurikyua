@@ -25,18 +25,28 @@ public:
     //‰ŠúˆÊ’u
     void SetPosition(float x, float y);
 
+    //”{—¦•Ï”
+    void SetScale(float s);
+
 private:
     //ˆÊ’uÀ•W
     VECTOR pos;
     int speed;
     int image;
 
-    int width = 32;   
-    int height = 32;
+    int width;   
+    int height;
+
+
+    // “–‚½‚è”»’è
+    int hitWidth;
+    int hitHeight;
 
     float vy;
     float gravity;
     float jumpPower;
+
+    float scale; //”{—¦
 
     bool isGround;
     int jumpCount;

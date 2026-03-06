@@ -24,6 +24,9 @@ void GameScene::Init()
         g_PlayerStartY
     );
 
+    //ƒvƒŒƒCƒ„[‘å‚«‚³”{—¦
+    player.SetScale(1.7f);
+
     // CSV‚©‚çEnemy¶¬
     for (int i = 0; i < g_EnemyCount; i++)
     {
