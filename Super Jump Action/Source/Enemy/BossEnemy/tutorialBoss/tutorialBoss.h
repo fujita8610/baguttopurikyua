@@ -50,7 +50,11 @@ private:
 
     int waitTimer = 0;
 
-    float dashSpeed = 8.0f;
+    float dashSpeed = 4.0f;
 
     void ChangeState(State newState);
+
+    bool idleRolled = false;
+
+    int idleTimer = 0;
 };
