@@ -21,6 +21,9 @@ public:
 
 	virtual bool IsAlive() const { return isAlive; }
 
+	float GetX() const { return x; }
+	float GetY() const { return y; }
+
 protected:
 	float x = 0.0f;
 	float y = 0.0f;

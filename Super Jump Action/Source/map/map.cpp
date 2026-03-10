@@ -18,10 +18,11 @@ int g_EnemyStartY[ENEMY_MAX];
 int g_EnemyCount = 0;
 int g_EnemyType[ENEMY_MAX];
 
-//Boss
+// Boss
 int g_BossStartX = -1;
 int g_BossStartY = -1;
 bool g_BossExist = false;
+
 
 //マップのロード
 bool LoadMapCSV(const char* filename)

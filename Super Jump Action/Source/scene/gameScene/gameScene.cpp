@@ -45,18 +45,57 @@ void GameScene::Init()
                 g_EnemyStartY[i]
             );
             break;
+
+        //case TILE_ENEMY3_START:   // 95
+        //    enemyManager.AddEnemyTile<>(
+        //        g_EnemyStartX[i],
+        //        g_EnemyStartY[i]
+        //    );
+        //    break;
+
+        //case TILE_ENEMY4_START:   // 94
+        //    enemyManager.AddEnemyTile<>(
+        //        g_EnemyStartX[i],
+        //        g_EnemyStartY[i]
+        //    );
+        //    break;
+
+        //case TILE_ENEMY5_START:   // 93
+        //    enemyManager.AddEnemyTile<>(
+        //        g_EnemyStartX[i],
+        //        g_EnemyStartY[i]
+        //    );
+        //    break;
+
+        //case TILE_ENEMY6_START:   // 92
+        //    enemyManager.AddEnemyTile<>(
+        //        g_EnemyStartX[i],
+        //        g_EnemyStartY[i]
+        //    );
+        //    break;
+
         }
 
     }
 
-    //ボスの生成
+    //ボス生成
     if (g_BossExist)
     {
-        boss = new TutorialBoss(
-            g_BossStartX * TILE_SIZE * TileManager::GetScale(),
-            g_BossStartY * TILE_SIZE * TileManager::GetScale()
-        );
+        float scale = TileManager::GetScale();
+
+        float bossX = g_BossStartX * TILE_SIZE * scale;
+        float bossY = g_BossStartY * TILE_SIZE * scale - 60;
+
+        bossBattle.Init(bossX, bossY);
     }
+
+   
+    //ボス戦移行
+    bossTriggerX = g_BossStartX * TILE_SIZE * TileManager::GetScale() - 100;
+    bossTriggerY = g_BossStartY * TILE_SIZE * TileManager::GetScale() -100;
+
+  
+    
 }
 
 void GameScene::Update()
@@ -83,6 +122,19 @@ void GameScene::Update()
     if (cameraX < 0) cameraX = 0;
     if (cameraY < 0) cameraY = 0;
 
+    //ボス戦開始
+    bossBattle.Update(player);
+    // 固定カメラ
+    if (bossBattle.IsBattle())
+    {
+        cameraX = bossBattle.GetCameraX();
+    }
+    else
+    {
+        cameraX = player.GetX() - 640 / 2;
+    }
+   
+
     //クールダウン
     input.LateUpdate();
 }
@@ -92,8 +144,7 @@ void GameScene::Draw()
     DrawMap(cameraX, cameraY);
     enemyManager.Draw(cameraX,cameraY);
     player.Draw(cameraX, cameraY);
-    if (boss)
-    {boss->Draw(cameraX, cameraY);}
+    bossBattle.Draw(cameraX, cameraY);
 }
 void GameScene::End()
 {

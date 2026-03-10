@@ -13,10 +13,12 @@
 #include "../../Enemy/MushroomSpike/MushroomSpike.h"
 
 //BOSS関連
+#include "../gameScene/BossBattle/BossBattle.h"
 #include "../../Enemy/BossEnemy/tutorialBoss/tutorialBoss.h"
 
 //シーン関連
 #include "../../GameDebug/GameDebug.h"
+
 
 class GameScene : public Scene
 {
@@ -32,11 +34,16 @@ private:
     Player player;
     Input input;
     EnemyManager enemyManager;
+    BossBattleManager bossBattle;
     TutorialBoss* boss = nullptr;
 
     //camera座標
     float cameraX = 0;
     float cameraY = 0;
+
+    //ボス戦移行
+    float bossTriggerX = 0;
+    float bossTriggerY = 0;
 
   
 };

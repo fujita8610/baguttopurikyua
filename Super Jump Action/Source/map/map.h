@@ -61,5 +61,3 @@ extern int g_BossStartX;
 extern int g_BossStartY;
 extern bool g_BossExist;
 
-
-
