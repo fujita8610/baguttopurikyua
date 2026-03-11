@@ -70,89 +70,87 @@ Player::Player()
     }
 }
 
-void Player::Update(Input& input) 
+void Player::Update(Input& input)
 {
-    //移動
     bool moving = false;
-    
-    // 左右キーの入力を個別にチェック
+
+    // 入力
     bool pressingLeft = input.IsKeyDown(KEY_INPUT_A);
     bool pressingRight = input.IsKeyDown(KEY_INPUT_D);
-    
-    // 左キーが新しく押された場合
+
     if (input.IsKeyDownTrigger(KEY_INPUT_A))
     {
         facingRight = false;
     }
-    
-    // 右キーが新しく押された場合
+
     if (input.IsKeyDownTrigger(KEY_INPUT_D))
     {
         facingRight = true;
     }
-    
-    // 実際の移動処理
+
+    //================
+    // 移動予定座標
+    //================
+
+    float nextX = pos.x;
+
     if (pressingLeft && !pressingRight)
     {
-        pos.x -= speed;
+        nextX -= speed;
         moving = true;
         facingRight = false;
     }
     else if (pressingRight && !pressingLeft)
     {
-        pos.x += speed;
+        nextX += speed;
         moving = true;
         facingRight = true;
     }
     else if (pressingLeft && pressingRight)
     {
-        // 両方押されている場合は最後に押された方向に移動
         if (facingRight)
         {
-            pos.x += speed;
+            nextX += speed;
         }
         else
         {
-            pos.x -= speed;
+            nextX -= speed;
         }
         moving = true;
     }
 
-    //ジャンプ
+    //================
+    // ジャンプ
+    //================
+
     if (input.IsKeyDownTrigger(KEY_INPUT_SPACE) && jumpCount < 2)
     {
         vy = jumpPower;
         jumpCount++;
     }
 
-    //重力
+    //================
+    // 重力
+    //================
+
     vy += gravity;
 
-    // 次のY位置
     float nextY = pos.y + vy;
 
     //================
-    // タイル座標変換
+    // タイルサイズ
     //================
 
     float scale = TileManager::GetScale();
     float tileSize = TILE_SIZE * scale;
 
-    // プレイヤーサイズ
-    // width, height はメンバで定義済み
-
-    int leftTile =
-        (int)(pos.x / tileSize);
-
-    int rightTile =
-        (int)((pos.x + hitWidth - 1) / tileSize);
-
-    int bottomTile =
-        (int)((nextY + hitHeight) / tileSize);
-
     //================
     // 地面判定
     //================
+
+    int leftTile = (int)(pos.x / tileSize);
+    int rightTile = (int)((pos.x + hitWidth - 1) / tileSize);
+    int bottomTile = (int)((nextY + hitHeight) / tileSize);
 
     if (vy > 0 &&
         (IsWall(leftTile, bottomTile) ||
@@ -169,62 +167,83 @@ void Player::Update(Input& input)
         isGround = false;
     }
 
-    //========
-    // アニメ状態更新
-    //========
+    //================
+    // 壁判定
+    //================
+
+    leftTile = (int)(nextX / tileSize);
+    rightTile = (int)((nextX + hitWidth - 1) / tileSize);
+
+    int topTile = (int)(pos.y / tileSize);
+    bottomTile = (int)((pos.y + hitHeight - 1) / tileSize);
+
+    if (!IsWall(leftTile, topTile) &&
+        !IsWall(leftTile, bottomTile) &&
+        !IsWall(rightTile, topTile) &&
+        !IsWall(rightTile, bottomTile))
+    {
+        pos.x = nextX;
+    }
+
+    //================
+    // アニメーション状態
+    //================
 
     State newState = State::Idle;
+
     if (!isGround)
     {
-        // 空中にいる時は速度で判定
         if (vy < 0)
         {
-            newState = State::Jump;  // 上昇中
+            newState = State::Jump;
         }
         else
         {
-            newState = State::Fall;  // 落下中
+            newState = State::Fall;
         }
     }
     else if (moving)
     {
         newState = State::Run;
     }
-    else
-    {
-        newState = State::Idle;
-    }
 
-    // 状態変化があればアニメーションを再設定
+    //================
+    // アニメーション更新
+    //================
+
     if (useSpriteSheet)
     {
         if (newState != state)
         {
             state = newState;
+
             switch (state)
             {
             case State::Idle:
                 if (idleFrames > 0)
                 {
-                    anim.Start(0, idleFrames - 1, 8, true); // ゆっくり
+                    anim.Start(0, idleFrames - 1, 8, true);
                 }
                 break;
+
             case State::Run:
                 if (runFrames > 0)
                 {
-                    anim.Start(0, runFrames - 1, 4, true);  // 早め
+                    anim.Start(0, runFrames - 1, 4, true);
                 }
                 break;
+
             case State::Jump:
                 if (jumpFrames > 0)
                 {
-                    anim.Start(0, jumpFrames - 1, 6, false); // ループなし
+                    anim.Start(0, jumpFrames - 1, 6, false);
                 }
                 break;
+
             case State::Fall:
                 if (fallFrames > 0)
                 {
-                    anim.Start(0, fallFrames - 1, 6, false); // ループなし
+                    anim.Start(0, fallFrames - 1, 6, false);
                 }
                 break;
             }
@@ -233,7 +252,6 @@ void Player::Update(Input& input)
         anim.Update();
     }
 }
-
 void Player::Draw(float camX,float camY)
 {
     int drawX = (int)(pos.x - camX);
