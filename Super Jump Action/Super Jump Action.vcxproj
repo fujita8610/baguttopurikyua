@@ -144,6 +144,7 @@
     <ClCompile Include="Source\map\map.cpp" />
     <ClCompile Include="Source\map\tileManager\tileManager.cpp" />
     <ClCompile Include="Source\Player\Player.cpp" />
+    <ClCompile Include="Source\scene\gameScene\BossBattle\BossBattle.cpp" />
     <ClCompile Include="Source\scene\gameScene\gameScene.cpp" />
     <ClCompile Include="Source\scene\sceneManager.cpp" />
     <ClCompile Include="Source\scene\title\titleScene.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Source\Enemy\BossEnemy\tutorialBoss\tutorialBoss.h" />
     <ClInclude Include="Source\Enemy\MushroomReg\MushroomReg.h" />
     <ClInclude Include="Source\Enemy\MushroomSpike\MushroomSpike.h" />
+    <ClInclude Include="Source\scene\gameScene\BossBattle\BossBattle.h" />
     <ClInclude Include="Source\System\Config.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\BossBase.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\EnemyBase.h" />

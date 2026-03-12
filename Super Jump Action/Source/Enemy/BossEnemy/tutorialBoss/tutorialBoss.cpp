@@ -7,9 +7,7 @@
 TutorialBoss::TutorialBoss(float startX, float startY)
     : BossBase(startX, startY, 20)
 {
-    state = State::Idle;
-
-    idle.Load("Data/Enemy/Boss_tutorial/Dino Rex/dino_rex_idle.png", 5, 1, 384, 128);
+    idle.Load("Data/Enemy/Boss_tutorial/Dino Rex/dino_rex_idle.png", 5, 1, 128, 128);
 
     flagBlack.Load("Data/Enemy/Boss_tutorial/Dino Rex/dino_rex_ability_black.png", 25, 1, 384, 128);
     flagRed.Load("Data/Enemy/Boss_tutorial/Dino Rex/dino_rex_ability_red.png", 25, 1, 384, 128);
@@ -21,6 +19,9 @@ TutorialBoss::TutorialBoss(float startX, float startY)
     dashLoop.Load("Data/Enemy/Boss_tutorial/Dino Rex/dino_rex_attack_B_2_loop.png", 5, 1, 384, 128);
     dashEnd.Load("Data/Enemy/Boss_tutorial/Dino Rex/dino_rex_attack_B_3_end.png", 7, 1, 384, 128);
 
+    state = State::Idle;
+    idleRolled = false;
+    idleTimer = 60;
     anim.Start(0, idle.GetTotal() - 1, 10, true);
 }
 
@@ -31,12 +32,13 @@ void TutorialBoss::ChangeState(State newState)
     switch (state)
     {
     case State::Wait:
-        anim.Start(0, idle.GetTotal() - 1, 10, true);  // Å© Ç±Ç±ÇæÇØÇ≈åƒÇ‘
+        anim.Start(0, idle.GetTotal() - 1, 10, true);
         break;
 
     case State::Idle:
         anim.Start(0, idle.GetTotal() - 1, 10, true);
         idleRolled = false;
+        idleTimer = 60;
         break;
 
     case State::FlagBlack:
@@ -83,12 +85,18 @@ void TutorialBoss::Update(const Player& player)
     {
         if (!idleRolled)
         {
-            idleRolled = true;
+            idleTimer--;
+            if (idleTimer <= 0)
+            {
+                idleRolled = true;
 
-            int r = GetRand(2);
-            if (r == 0) ChangeState(State::FlagBlack);
-            else if (r == 1) ChangeState(State::FlagRed);
-            else ChangeState(State::FlagYellow);
+                int r = GetRand(2);
+                if (r == 0) ChangeState(State::FlagBlack);
+                else if (r == 1) ChangeState(State::FlagRed);
+                else ChangeState(State::FlagYellow);
+
+                stateChanged = true;
+            }
         }
     }
     break;
@@ -96,7 +104,10 @@ void TutorialBoss::Update(const Player& player)
     case State::Wait:
         waitTimer--;
         if (waitTimer <= 0)
+        {
             ChangeState(State::Idle);
+            stateChanged = true;
+        }
         break;
 
     case State::FlagBlack:
@@ -184,6 +195,7 @@ void TutorialBoss::Draw(float camX, float camY)
 {
     int frame = anim.GetFrame();
     int handle = -1;
+    int offsetX = 0;
 
     switch (state)
     {
@@ -197,34 +209,41 @@ void TutorialBoss::Draw(float camX, float camY)
 
     case State::FlagBlack:
         handle = flagBlack.Get(frame);
+        offsetX = -128;
         break;
 
     case State::FlagRed:
         handle = flagRed.Get(frame);
+        offsetX = -128;
         break;
 
     case State::FlagYellow:
         handle = flagYellow.Get(frame);
+        offsetX = -128;
         break;
 
     case State::Stamp:
         handle = stamp.Get(frame);
+        offsetX = -128;
         break;
 
     case State::DashStart:
         handle = dashStart.Get(frame);
+        offsetX = -128;
         break;
 
     case State::DashLoop:
         handle = dashLoop.Get(frame);
+        offsetX = -128;
         break;
 
     case State::DashEnd:
         handle = dashEnd.Get(frame);
+        offsetX = -128;
         break;
     }
 
-    int drawX = (int)(x - camX);
+    int drawX = (int)(x - camX) + offsetX;
     int drawY = (int)(y - camY);
 
     if (handle == -1) return;
@@ -247,6 +266,8 @@ void TutorialBoss::Draw(float camX, float camY)
             FALSE
         );
     }
+
+   
 }
 
 Rect TutorialBoss::GetRect() const
@@ -255,7 +276,7 @@ Rect TutorialBoss::GetRect() const
 
     r.left = x;
     r.right = x + 128;
-    r.top = y;
+    r.top = y + 32;
     r.bottom = y + 128;
 
     return r;
