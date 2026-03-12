@@ -11,8 +11,23 @@ void TitleScene::Init()
     cursor = 0;
 
    // 画像読み込み
+   // セレクトバーの読み込み
    // titleFrameHandle = LoadGraph("Data/UI/title_frame.png");
     selectBarHandle = LoadGraph("Data/Title/selectBar1.png");
+
+    // プレイヤーRUNアニメ読み込み
+    if (playerRun.Load("Data/Player/Sprites/RUN.png", 8, 1, 96, 96))
+    {
+        playerFrames = playerRun.GetTotal();
+        playerAnim.Start(0, playerFrames - 1, 4, true);
+    }
+
+    // プレイヤー待機アニメ
+    if (playerIdle.Load("Data/Player/Sprites/IDLE.png", 10, 1, 96, 96))
+    {
+        idleFrames = playerIdle.GetTotal();
+        playerIdleAnim.Start(0, idleFrames - 1, 8, true);
+    }
 }
 
 void TitleScene::Update()
@@ -60,6 +75,11 @@ void TitleScene::Update()
         }
     }
 
+    //他cppからの宣言
+    playerAnim.Update();
+    playerIdleAnim.Update();
+
+
     input.LateUpdate();
 }
 
@@ -100,16 +120,46 @@ void TitleScene::Draw()
                 selectBarHandle,
                 TRUE
             );
-\
+
+            // ===== プレイヤーアニメ =====
+            int frame = playerAnim.GetFrame();
+            int handle = playerRun.Get(frame);
+
+            DrawRotaGraph(
+                baseX - 60,   // メニューの左
+                y ,
+                0.7,
+                0.0,
+                handle,
+                TRUE
+            );
+
 
             //セレクト中は点滅
-            DrawString(baseX, y, menu[i],brightness);
+               DrawString(baseX, y, menu[i], blinkColor);
 
         }
         else
         {
             DrawString(baseX, y, menu[i], GetColor(255, 255, 255));
         }
+
+        int idleFrame = playerIdleAnim.GetFrame();
+        int idleHandle = playerIdle.Get(idleFrame);
+
+        // 左の大きいスペース
+        int playerX = 200;
+        int playerY = 350;
+
+        // ===== プレイヤー待機モーション =====
+        DrawRotaGraph(
+            playerX,
+            playerY,
+            2.0,
+            0.0,
+            idleHandle,
+            TRUE
+        );
 
         // ===== デバッグ枠 =====
         if (GameDebug::IsDebug())

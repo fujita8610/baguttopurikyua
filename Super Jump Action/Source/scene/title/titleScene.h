@@ -2,6 +2,10 @@
 #include "../scene.h"
 #include "../../Input/Input.h"
 
+//アニメーション関連
+#include "../../Graphics/SpriteSheet.h"
+#include "../../Animation/Animation.h"
+
 
 class TitleScene : public Scene
 {
@@ -14,6 +18,7 @@ class TitleScene : public Scene
 
     private:
         Input input;
+        
 
 
         //画像ハンドル
@@ -26,4 +31,14 @@ class TitleScene : public Scene
 
         //タイマー
         int blinkTimer = 0;
+
+        //走るアニメーション
+        SpriteSheet playerRun;
+        Animation playerAnim;
+        int playerFrames; 
+
+        //待機モーション
+        SpriteSheet playerIdle;
+        Animation playerIdleAnim;
+        int idleFrames;
 };
