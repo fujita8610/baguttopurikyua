@@ -4,6 +4,7 @@
 #include "titleScene.h"
 #include "../sceneManager.h"
 #include "../../scene/gameScene/gameScene.h"
+#include "../../scene/option/option.h"
 
 void TitleScene::Init()
 {
@@ -66,8 +67,8 @@ void TitleScene::Update()
             break;
 
         case 2: // オプション
-            // 今後実装
-            break;
+            SceneManager::ChangeScene(new OptionScene());
+            return;
 
         case 3: // ゲーム終了
             DxLib_End();
