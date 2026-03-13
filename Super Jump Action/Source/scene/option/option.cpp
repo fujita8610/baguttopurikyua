@@ -231,7 +231,7 @@ void OptionScene::Draw()
     sprintf_s(lines[2], sizeof(lines[2]),
         "SE  Volume   :  < [%s] %3d >", seBuf, editSe);
 
-    sprintf_s(lines[3], sizeof(lines[3]), "Back  (Esc)");
+    sprintf_s(lines[3], sizeof(lines[3]), "Back  (Esc / Enter)");
 
     for (int i = 0; i < (int)MenuItem::MAX; i++)
     {
