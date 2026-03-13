@@ -359,6 +359,18 @@ float Player::GetY() const
 	return pos.y;
 }   
 
+Rect Player::GetRect() const
+{
+    Rect r;
+
+    r.left = pos.x;
+    r.top = pos.y;
+    r.right = pos.x + hitWidth;
+    r.bottom = pos.y + hitHeight;
+
+    return r;
+}
+
 bool Player::IsJumping() const
 {
     return !isGround;

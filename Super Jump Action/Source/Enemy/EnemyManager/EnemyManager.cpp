@@ -1,14 +1,27 @@
 #include "EnemyManager.h"
 #include "../EnemyBase/EnemyBase.h"
+#include "../EnemyCollision/EnemyCollision.h"
 #include <algorithm>
 
 void EnemyManager::Update(const Player& player)
 {
+    Rect playerRect = player.GetRect();
+
     // ‘S“G‚ÌXV
     for (auto& enemy : enemies)
     {
         enemy->Update(player);
+
+        if (EnemyCollision::CheckRect(
+            playerRect,
+            enemy->GetRect()))
+        {
+           // player.Damage();
+        }
     }
+
+   
+
 
     // €–S‚µ‚½“G‚ğíœ
     enemies.erase(

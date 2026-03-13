@@ -5,9 +5,15 @@
 #include "../Input/Input.h"
 #include "../System/cooldown.h"
 
+//当たり判定
+#include "../System/Rect.h"
+
 //アニメーション関連
 #include "../Graphics/SpriteSheet.h"
 #include "../Animation/Animation.h"
+
+//enemy関連
+#include "../Enemy/EnemyBase/EnemyBase.h"
 
 
 class Player
@@ -19,6 +25,9 @@ public:
 
     float GetX() const;
     float GetY() const;
+
+    //当たり判定
+    Rect GetRect() const;
 
     bool IsJumping() const;
 

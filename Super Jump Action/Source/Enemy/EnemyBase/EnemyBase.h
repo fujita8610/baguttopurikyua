@@ -1,13 +1,8 @@
 #pragma once
 #include "../../Player/Player.h"
+#include "../../System/Rect.h"
 
-struct Rect
-{
-	float left;
-	float top;
-	float right;
-	float bottom;
-};
+class Player;
 
 class EnemyBase
 {
@@ -23,6 +18,8 @@ public:
 
 	float GetX() const { return x; }
 	float GetY() const { return y; }
+	int GetWidth() const { return hitWidth; }
+	int GetHeight() const { return hitHeight; }
 
 protected:
 	float x = 0.0f;
