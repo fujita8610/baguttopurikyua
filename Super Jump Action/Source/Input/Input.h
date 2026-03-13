@@ -26,4 +26,11 @@ public:
     bool IsKeyDownTrigger(int key) {
         return currKey[key] && !prevKey[key];
     }
+
+    //“ü—Í‚ÌƒŠƒZƒbƒg
+    void Reset()
+    {
+        memset(currKey, 0, sizeof(currKey));
+        memset(prevKey, 0, sizeof(prevKey));
+    }
 };

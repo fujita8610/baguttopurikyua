@@ -115,24 +115,45 @@ void GameScene::Update()
     enemyManager.Update(player);
     if (boss) {boss->Update(player);}
 
-    // カメラ更新
-    cameraX = player.GetX() - 640 / 2;
-    cameraY = player.GetY() - 360 / 2;
-    // マイナス防止
-    if (cameraX < 0) cameraX = 0;
-    if (cameraY < 0) cameraY = 0;
+  //====================
+  // カメラ更新
+  //====================
 
-    //ボス戦開始
-    bossBattle.Update(player);
-    // 固定カメラ
+    int screenW, screenH;
+    GetScreenState(&screenW, &screenH, NULL);
+
     if (bossBattle.IsBattle())
     {
         cameraX = bossBattle.GetCameraX();
     }
     else
     {
-        cameraX = player.GetX() - 640 / 2;
+        cameraX = player.GetX() - screenW / 2;
     }
+
+    cameraY = player.GetY() - screenH / 2;
+
+    // マイナス防止
+    if (cameraX < 0) cameraX = 0;
+    if (cameraY < 0) cameraY = 0;
+
+    // マップ端制限
+    float mapWidth = MAP_WIDTH * TILE_SIZE * TileManager::GetScale();
+    float mapHeight = MAP_HEIGHT * TILE_SIZE * TileManager::GetScale();
+
+    if (cameraX > mapWidth - screenW)
+    {
+        cameraX = mapWidth - screenW;
+    }
+
+    if (cameraY > mapHeight - screenH)
+    {
+        cameraY = mapHeight - screenH;
+    }
+
+    //ボス戦開始
+    bossBattle.Update(player);
+  
    
 
     //クールダウン

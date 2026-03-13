@@ -31,6 +31,7 @@ class TitleScene : public Scene
 
         //タイマー
         int blinkTimer = 0;
+        int inputWait;
 
         //走るアニメーション
         SpriteSheet playerRun;

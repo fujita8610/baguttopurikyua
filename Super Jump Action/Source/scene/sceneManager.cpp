@@ -1,5 +1,8 @@
 #include "scenemanager.h"
 
+//“ü—Í
+#include "../Input/Input.h"
+
 Scene* SceneManager::currentScene = nullptr;
 
 void SceneManager::ChangeScene(Scene* scene)
@@ -10,6 +13,8 @@ void SceneManager::ChangeScene(Scene* scene)
 
         delete currentScene;
     }
+
+  
 
     currentScene = scene;
     currentScene->Init();

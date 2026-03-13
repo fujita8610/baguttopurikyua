@@ -8,8 +8,12 @@
 
 void TitleScene::Init()
 {
+    
+
     //カーソル
     cursor = 0;
+
+    inputWait = 10; //10秒間入力虫
 
    // 画像読み込み
    // セレクトバーの読み込み
@@ -33,7 +37,14 @@ void TitleScene::Init()
 
 void TitleScene::Update()
 {
+    //入力関連
     input.Update();
+    if (inputWait > 0)
+    {
+        inputWait--;
+        input.LateUpdate();
+        return;
+    }
 
     blinkTimer++;   // 点滅用タイマー
 
