@@ -397,6 +397,19 @@ void Player::Draw(float camX,float camY)
             GetColor(255, 0, 0),
             FALSE);
 
+        // 攻撃判定の表示
+        if (attacking)
+        {
+            Rect atkRect = GetAttackRect();
+            DrawBox(
+                (int)(atkRect.left - camX),
+                (int)(atkRect.top - camY),
+                (int)(atkRect.right - camX),
+                (int)(atkRect.bottom - camY),
+                GetColor(255, 255, 0),
+                FALSE);
+        }
+
         // 座標表示（フォールバック時も表示）
         DrawFormatString(10, 10, GetColor(255, 255, 255), TEXT("X:%d Y:%d"), (int)pos.x, (int)pos.y);
     }
