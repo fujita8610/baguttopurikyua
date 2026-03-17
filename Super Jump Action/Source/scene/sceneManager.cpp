@@ -3,6 +3,10 @@
 //“ü—Í
 #include "../Input/Input.h"
 
+//font
+#include "../FontManager/Fontmanager.h"
+
+
 Scene* SceneManager::currentScene = nullptr;
 
 void SceneManager::ChangeScene(Scene* scene)
@@ -19,6 +23,11 @@ void SceneManager::ChangeScene(Scene* scene)
     currentScene = scene;
     currentScene->Init();
 
+}
+
+void SceneManager::Init()
+{
+  
 }
 
 void SceneManager::Update()

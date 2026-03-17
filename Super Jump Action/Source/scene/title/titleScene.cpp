@@ -16,9 +16,18 @@ void TitleScene::Init()
     inputWait = 10; //10秒間入力虫
 
    // 画像読み込み
+   // 背景
+    bgHandle = LoadGraph("Data/Title/20131005080742.png");
+    if (bgHandle == -1)
+    {
+        printfDx("背景画像読み込み失敗\n");
+    }
+
    // セレクトバーの読み込み
    // titleFrameHandle = LoadGraph("Data/UI/title_frame.png");
     selectBarHandle = LoadGraph("Data/Title/selectBar1.png");
+
+
 
     // プレイヤーRUNアニメ読み込み
     if (playerRun.Load("Data/Player/Sprites/RUN.png", 8, 1, 96, 96))
@@ -97,7 +106,27 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-    DrawString(200, 150, "SUPER JUMP ACTION", GetColor(255, 255, 255));
+    // 背景
+  // 背景（右側に配置）
+    DrawRotaGraph(
+        500,   // 右側
+        50,    // 中央
+        1.8,    // 少し大きめ
+        0.0,
+        bgHandle,
+        TRUE
+    );
+
+    //タイトル
+    DrawExtendString(
+        200,
+        150,
+        2.0,   // 横倍率
+        2.0,   // 縦倍率
+        "SUPER JUMP ACTION",
+        GetColor(255, 255, 255)
+    );
+
 
     const char* menu[MENU_MAX] =
     {

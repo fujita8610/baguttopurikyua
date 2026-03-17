@@ -4,6 +4,7 @@
 class SceneManager
 {
 public:
+    static void Init();
     static void ChangeScene(Scene* scene);
     static void Update();
     static void Draw();
