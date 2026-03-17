@@ -31,8 +31,13 @@ Player::Player()
     runFrames = 0;
     jumpFrames = 0;
     fallFrames = 0;
+    attackFrames = 0;
     state = State::Idle;
     facingRight = true; // 初期状態は右向き
+
+    attacking = false;
+    attackTimer = 0;
+    attackingRight = true; // 攻撃方向も初期状態は右
 
     // IDLE スプライトシート読み込み
     if (spriteIdle.Load("Data/Player/Sprites/IDLE.png", 10, 1, 96, 96))
@@ -58,8 +63,14 @@ Player::Player()
         fallFrames = spriteFall.GetTotal();
     }
 
+    // AIR ATTACK スプライトシート読み込み(横攻撃)
+    if (spriteAttack.Load("Data/Player/Sprites/AIR ATTACK.png", 6, 1, 96, 96))
+    {
+        attackFrames = spriteAttack.GetTotal();
+    }
+
     // 少なくとも1つのスプライトが読み込めたら有効化
-    if (idleFrames > 0 || runFrames > 0 || jumpFrames > 0 || fallFrames > 0)
+    if (idleFrames > 0 || runFrames > 0 || jumpFrames > 0 || fallFrames > 0 || attackFrames > 0)
     {
         useSpriteSheet = true;
         // 初期状態は Idle
@@ -86,6 +97,32 @@ void Player::Update(Input& input)
     if (input.IsKeyDownTrigger(KEY_INPUT_D))
     {
         facingRight = true;
+    }
+
+    //================
+    // 左右矢印キーで横攻撃
+    //================
+
+    if (!attacking)
+    {
+        if (input.IsKeyDownTrigger(KEY_INPUT_LEFT))
+        {
+            attacking = true;
+            attackTimer = 0;
+            attackingRight = false;  // 攻撃方向は左矢印キーの方向
+        }
+        else if (input.IsKeyDownTrigger(KEY_INPUT_RIGHT))
+        {
+            attacking = true;
+            attackTimer = 0;
+            attackingRight = true;   // 攻撃方向は右矢印キーの方向
+        }
+    }
+
+    // 攻撃タイマー更新
+    if (attacking)
+    {
+        attackTimer++;
     }
 
     //================
@@ -191,7 +228,11 @@ void Player::Update(Input& input)
 
     State newState = State::Idle;
 
-    if (!isGround)
+    if (attacking)
+    {
+        newState = State::Attack;
+    }
+    else if (!isGround)
     {
         if (vy < 0)
         {
@@ -246,7 +287,21 @@ void Player::Update(Input& input)
                     anim.Start(0, fallFrames - 1, 6, false);
                 }
                 break;
+
+            case State::Attack:
+                if (attackFrames > 0)
+                {
+                    anim.Start(0, attackFrames - 1, 4, false);
+                }
+                break;
             }
+        }
+
+        // 攻撃アニメーションが終わったら攻撃終了
+        if (attacking && anim.IsFinished())
+        {
+            attacking = false;
+            attackTimer = 0;
         }
 
         anim.Update();
@@ -282,6 +337,10 @@ void Player::Draw(float camX,float camY)
             if (fallFrames > 0)
                 handle = spriteFall.Get(frame);
             break;
+        case State::Attack:
+            if (attackFrames > 0)
+                handle = spriteAttack.Get(frame);
+            break;
         }
         
         if (handle >= 0)
@@ -293,6 +352,9 @@ void Player::Draw(float camX,float camY)
             int spriteDrawX = drawX - (spriteW - width);
             int spriteDrawY = drawY - (spriteH - height);
 
+            // 攻撃状態の場合はattackingRightを基準に反転、それ以外はfacingRightを基準に反転
+            bool shouldFlip = (state == State::Attack) ? !attackingRight : !facingRight;
+
             DrawRotaGraph(
                 spriteDrawX + 80,
                 spriteDrawY + 60,
@@ -300,7 +362,7 @@ void Player::Draw(float camX,float camY)
                 0.0,        // 回転
                 handle,
                 TRUE,
-                !facingRight // 左向きなら反転
+                shouldFlip   // 左向きなら反転
             );
 
             
@@ -374,6 +436,37 @@ Rect Player::GetRect() const
 bool Player::IsJumping() const
 {
     return !isGround;
+}
+
+bool Player::IsAttacking() const
+{
+    return attacking;
+}
+
+Rect Player::GetAttackRect() const
+{
+    Rect r = {};
+    if (!attacking) return r;
+
+    const float attackWidth = 40.0f;
+    const float attackHeight = 40.0f;
+
+    if (attackingRight)
+    {
+        r.left = pos.x + hitWidth;
+        r.top = pos.y + (hitHeight - attackHeight) / 2.0f;
+        r.right = r.left + attackWidth;
+        r.bottom = r.top + attackHeight;
+    }
+    else
+    {
+        r.right = pos.x;
+        r.top = pos.y + (hitHeight - attackHeight) / 2.0f;
+        r.left = r.right - attackWidth;
+        r.bottom = r.top + attackHeight;
+    }
+
+    return r;
 }
 
 //倍率変数

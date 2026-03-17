@@ -29,6 +29,10 @@ public:
     //当たり判定
     Rect GetRect() const;
 
+    // 攻撃判定（攻撃中のみ有効な矩形を返す）
+    bool IsAttacking() const;
+    Rect GetAttackRect() const;
+
     bool IsJumping() const;
 
     //初期位置
@@ -60,7 +64,7 @@ private:
     bool isGround;
     int jumpCount;
 
-    //通常 cpp/.h での宣言を兼用
+    //通常 cpp/.h での宣言用パターン
     Cooldown jumpCooldown;
 
     // アニメーション関連
@@ -68,6 +72,7 @@ private:
     SpriteSheet spriteRun;    // Run用
     SpriteSheet spriteJump;   // Jump用(上昇)
     SpriteSheet spriteFall;   // Fall用(落下)
+    SpriteSheet spriteAttack; // Attack用(横攻撃)
     
     Animation anim;
     
@@ -75,11 +80,17 @@ private:
     int runFrames;
     int jumpFrames;
     int fallFrames;
+    int attackFrames;
     
-    enum class State { Idle, Run, Jump, Fall } state;
+    enum class State { Idle, Run, Jump, Fall, Attack } state;
     bool useSpriteSheet;
 
-    // 向き（true = 右向き、false = 左向き）
+    // 方向(true = 右向き、false = 左向き)
     bool facingRight;
+
+    // 攻撃関連
+    bool attacking;
+    int attackTimer;
+    bool attackingRight; // 攻撃方向（true = 右、false = 左）
 };
 
