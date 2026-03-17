@@ -113,7 +113,9 @@ void GameScene::Update()
     //動くもの更新
     player.Update(input);
     enemyManager.Update(player);
-    if (boss) {boss->Update(player);}
+
+    //ボス戦開始
+    bossBattle.Update(player);
 
   //====================
   // カメラ更新
@@ -124,7 +126,10 @@ void GameScene::Update()
 
     if (bossBattle.IsBattle())
     {
-        cameraX = bossBattle.GetCameraX();
+        float targetX = bossBattle.GetCameraX();
+
+        // スムーズ移動
+        cameraX += (targetX - cameraX) * 0.04f;
     }
     else
     {
@@ -150,12 +155,7 @@ void GameScene::Update()
     {
         cameraY = mapHeight - screenH;
     }
-
-    //ボス戦開始
-    bossBattle.Update(player);
   
-   
-
     //クールダウン
     input.LateUpdate();
 }
