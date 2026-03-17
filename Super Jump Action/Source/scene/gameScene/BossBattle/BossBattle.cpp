@@ -35,6 +35,7 @@ void BossBattleManager::Update(Player& player)
 
     case BOSS_BATTLE:
 
+        boss->SetCamera(cameraX);
         boss->Update(player);
 
         cameraX = boss->GetX() - 640 / 2;

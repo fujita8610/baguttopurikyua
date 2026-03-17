@@ -12,8 +12,11 @@ public:
     void Draw(float camX, float camY) override;
     Rect GetRect() const override;
 
+    void SetCamera(float camX) { camXRef = camX; }
+
 private:
 
+    float camXRef = 0.0f;
     enum class State
     {
         Idle,
