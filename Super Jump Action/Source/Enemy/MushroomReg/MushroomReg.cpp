@@ -1,5 +1,7 @@
 #include "MushroomReg.h"
 #include "DxLib.h"
+#include "../../map/map.h"
+#include "../../map/tileManager/tileManager.h"
 
 MushroomReg::MushroomReg(float startX, float startY)
 {
@@ -18,12 +20,23 @@ void MushroomReg::Update(const Player& player)
 {
     x += speed * dir;
 
-    // 画面端で反転（仮）
-    if (x < 0)
-        dir = 1;
+    // 実際のタイルサイズ = 8 × 4 = 32
+    const int actualTileSize = TILE_SIZE * SCALE;
 
-    if (x > 640 - 32)
-        dir = -1;
+    // 進行方向の前端のタイル座標を取得
+    int checkX;
+    if (dir == 1)
+        checkX = (int)(x + hitWidth) / actualTileSize;  // 右端
+    else
+        checkX = (int)(x) / actualTileSize;              // 左端
+
+    int checkY = (int)(y + hitHeight / 2) / actualTileSize;  // 中心Y
+
+    if (IsWall(checkX, checkY))
+    {
+        dir *= -1;
+        x -= speed * dir * 2;  // めり込み解消
+    }
 
     anim.Update();
 }

@@ -266,8 +266,6 @@ void TutorialBoss::Draw(float camX, float camY)
             FALSE
         );
     }
-
-   
 }
 
 Rect TutorialBoss::GetRect() const

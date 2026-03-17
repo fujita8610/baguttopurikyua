@@ -134,6 +134,7 @@
     <ClCompile Include="Source\Animation\Animation.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Enemy\BossEnemy\tutorialBoss\tutorialBoss.cpp" />
+    <ClCompile Include="Source\Enemy\EnemyCollision\EnemyCollision.cpp" />
     <ClCompile Include="Source\Enemy\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="Source\Enemy\MushroomReg\MushroomReg.cpp" />
     <ClCompile Include="Source\Enemy\MushroomSpike\MushroomSpike.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Source\Player\Player.cpp" />
     <ClCompile Include="Source\scene\gameScene\BossBattle\BossBattle.cpp" />
     <ClCompile Include="Source\scene\gameScene\gameScene.cpp" />
+    <ClCompile Include="Source\scene\option\option.cpp" />
     <ClCompile Include="Source\scene\sceneManager.cpp" />
     <ClCompile Include="Source\scene\title\titleScene.cpp" />
   </ItemGroup>
@@ -153,9 +155,11 @@
     <ClInclude Include="Source\Animation\Animation.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
     <ClInclude Include="Source\Enemy\BossEnemy\tutorialBoss\tutorialBoss.h" />
+    <ClInclude Include="Source\Enemy\EnemyCollision\EnemyCollision.h" />
     <ClInclude Include="Source\Enemy\MushroomReg\MushroomReg.h" />
     <ClInclude Include="Source\Enemy\MushroomSpike\MushroomSpike.h" />
     <ClInclude Include="Source\scene\gameScene\BossBattle\BossBattle.h" />
+    <ClInclude Include="Source\scene\option\option.h" />
     <ClInclude Include="Source\System\Config.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\BossBase.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\EnemyBase.h" />
