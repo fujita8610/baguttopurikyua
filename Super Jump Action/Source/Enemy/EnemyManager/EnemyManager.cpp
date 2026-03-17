@@ -6,24 +6,50 @@
 void EnemyManager::Update(const Player& player)
 {
     Rect playerRect = player.GetRect();
+    Rect playerAttackRect = player.GetAttackRect();
 
     // 全敵の更新
     for (auto& enemy : enemies)
     {
         enemy->Update(player);
 
-        if (EnemyCollision::CheckRect(
-            playerRect,
-            enemy->GetRect()))
+        if (!player.IsAlive()) continue;
+
+        Rect enemyRect = enemy->GetRect();
+
+        // プレイヤーの攻撃判定とエネミーが接触しているか
+        if (player.IsAttacking() && EnemyCollision::CheckRect(playerAttackRect, enemyRect))
         {
-           // player.Damage();
+            // 敵にダメージを与える（倒す）
+            enemy->TakeDamage(1);
+        }
+        else
+        {
+            // プレイヤーとエネミーが接触しているか
+            if (EnemyCollision::CheckRect(playerRect, enemyRect))
+            {
+                // 踏まれ判定を無視する敵（トゲなど）の場合
+                if (enemy->IsInvulnerableToStomp())
+                {
+                    // 常にプレイヤーが死ぬ
+                    const_cast<Player&>(player).TakeDamageFromEnemy();
+                }
+                else
+                {
+                    bool enemyStomped = false;
+                    const_cast<Player&>(player).CheckEnemyCollision(enemyRect, enemyStomped);
+
+                    if (enemyStomped)
+                    {
+                        // 敵を倒す
+                        enemy->TakeDamage(1);
+                    }
+                }
+            }
         }
     }
 
-   
-
-
-    // 死亡した敵を削除
+    // 死んだ敵を削除
     enemies.erase(
         std::remove_if(enemies.begin(), enemies.end(),
             [](const std::unique_ptr<EnemyBase>& enemy)
@@ -31,7 +57,7 @@ void EnemyManager::Update(const Player& player)
                 return !enemy->IsAlive();
             }),
         enemies.end()
-                );
+    );
 }
 
 void EnemyManager::Draw(float camX, float camY)
@@ -39,7 +65,7 @@ void EnemyManager::Draw(float camX, float camY)
     // 全敵の描画
     for (auto& enemy : enemies)
     {
-        enemy->Draw(camX,camY);
+        enemy->Draw(camX, camY);
     }
 }
 

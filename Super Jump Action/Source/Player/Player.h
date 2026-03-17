@@ -34,12 +34,19 @@ public:
     Rect GetAttackRect() const;
 
     bool IsJumping() const;
+    bool IsAlive() const;
 
     //初期位置
     void SetPosition(float x, float y);
 
     //倍率変数
     void SetScale(float s);
+
+    // 敵との接触判定（上から踏んだか横からぶつかったか判定）
+    void CheckEnemyCollision(const Rect& enemyRect, bool& outEnemyStomped);
+
+    // 敵に踏まれてダメージを受ける（踏まれ判定を無視する敵用）
+    void TakeDamageFromEnemy();
 
 private:
     //位置座標
@@ -92,5 +99,8 @@ private:
     bool attacking;
     int attackTimer;
     bool attackingRight; // 攻撃方向（true = 右、false = 左）
+
+    // 生死状態
+    bool alive;
 };
 

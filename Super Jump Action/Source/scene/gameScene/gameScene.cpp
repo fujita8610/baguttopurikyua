@@ -110,7 +110,15 @@ void GameScene::Update()
         exit(0);
     }
 
-    //動くもの更新
+        // プレイヤーが生存しているかチェック
+    if (!player.IsAlive())
+    {
+        // ゲームオーバー処理（ここでは簡単にゲーム終了）
+        DxLib_End();
+        exit(0);
+    }
+
+    //プレイヤーの更新
     player.Update(input);
     enemyManager.Update(player);
 
@@ -142,7 +150,7 @@ void GameScene::Update()
     if (cameraX < 0) cameraX = 0;
     if (cameraY < 0) cameraY = 0;
 
-    // マップ端制限
+    // マップ境界
     float mapWidth = MAP_WIDTH * TILE_SIZE * TileManager::GetScale();
     float mapHeight = MAP_HEIGHT * TILE_SIZE * TileManager::GetScale();
 
@@ -156,7 +164,7 @@ void GameScene::Update()
         cameraY = mapHeight - screenH;
     }
   
-    //クールダウン
+    //クールダウン更新
     input.LateUpdate();
 }
 

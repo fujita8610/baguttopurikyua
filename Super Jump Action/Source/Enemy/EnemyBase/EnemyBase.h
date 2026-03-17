@@ -21,6 +21,20 @@ public:
 	int GetWidth() const { return hitWidth; }
 	int GetHeight() const { return hitHeight; }
 
+	// 踏まれ判定を無視するかどうか（true = 踏んでもダメージなし、横からの接触で死ぬ）
+	virtual bool IsInvulnerableToStomp() const { return false; }
+
+	void TakeDamage(int damage)
+	{
+		if (!isAlive) return;
+		hp -= damage;
+		if (hp <= 0)
+		{
+			hp = 0;
+			isAlive = false;
+		}
+	}
+
 protected:
 	float x = 0.0f;
 	float y = 0.0f;

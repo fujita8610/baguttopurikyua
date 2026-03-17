@@ -39,6 +39,8 @@ Player::Player()
     attackTimer = 0;
     attackingRight = true; // 攻撃方向も初期状態は右
 
+    alive = true; // 初期状態は生存
+
     // IDLE スプライトシート読み込み
     if (spriteIdle.Load("Data/Player/Sprites/IDLE.png", 10, 1, 96, 96))
     {
@@ -473,4 +475,56 @@ Rect Player::GetAttackRect() const
 void Player:: SetScale(float s)
 {
     scale = s;
+}
+
+bool Player::IsAlive() const
+{
+    return alive;
+}
+
+void Player::TakeDamageFromEnemy()
+{
+    if (!alive) return;
+    alive = false;
+}
+
+void Player::CheckEnemyCollision(const Rect& enemyRect, bool& outEnemyStomped)
+{
+    if (!alive) return;
+
+    Rect playerRect = GetRect();
+
+    // プレイヤーと敵が接触しているか
+    if (playerRect.right < enemyRect.left || 
+        playerRect.left > enemyRect.right ||
+        playerRect.bottom < enemyRect.top || 
+        playerRect.top > enemyRect.bottom)
+    {
+        outEnemyStomped = false;
+        return;
+    }
+
+    // 上から踏んだかどうか判定
+    // プレイヤーの前フレームのY座標より敵の上の辺が下にあり、
+    // 現在のプレイヤーのY座標が敵の上の辺より上の場合、上から踏んだと判定
+    float overlap = playerRect.bottom - enemyRect.top;
+    float sideOverlap = (playerRect.right < enemyRect.right ? 
+                         playerRect.right - enemyRect.left : 
+                         enemyRect.right - playerRect.left);
+
+    // 上からの踏みつけ判定（上下の重なりが左右の重なりより大きい、かつ下からの接触ではない）
+    if (overlap > 0 && overlap < sideOverlap && vy >= 0 && playerRect.bottom >= enemyRect.top)
+    {
+        // 上から踏んだ
+        outEnemyStomped = true;
+        // ジャンプさせる
+        vy = jumpPower;
+        jumpCount = 0;
+    }
+    else
+    {
+        // 横からぶつかった → 死亡
+        outEnemyStomped = false;
+        alive = false;
+    }
 }
