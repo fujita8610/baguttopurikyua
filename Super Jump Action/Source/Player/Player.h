@@ -35,6 +35,7 @@ public:
 
     bool IsJumping() const;
     bool IsAlive() const;
+    bool IsDeathAnimationFinished() const;
 
     //初期位置
     void SetPosition(float x, float y);
@@ -49,6 +50,8 @@ public:
     void TakeDamageFromEnemy();
 
 private:
+    void StartDeath();
+
     //位置座標
     VECTOR pos;
     int speed;
@@ -80,6 +83,7 @@ private:
     SpriteSheet spriteJump;   // Jump用(上昇)
     SpriteSheet spriteFall;   // Fall用(落下)
     SpriteSheet spriteAttack; // Attack用(横攻撃)
+    SpriteSheet spriteDeath;  // Death用
     
     Animation anim;
     
@@ -88,8 +92,9 @@ private:
     int jumpFrames;
     int fallFrames;
     int attackFrames;
+    int deathFrames;
     
-    enum class State { Idle, Run, Jump, Fall, Attack } state;
+    enum class State { Idle, Run, Jump, Fall, Attack, Death } state;
     bool useSpriteSheet;
 
     // 方向(true = 右向き、false = 左向き)

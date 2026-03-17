@@ -1,14 +1,17 @@
 #include "DxLib.h"
 #include "gameScene.h"
+#include "../sceneManager.h"
+#include "../title/titleScene.h"
 
 //マップ関連
 #include "../../map/manager/mapmanager.h"
 #include "../../map/tileManager/tileManager.h"
 #include "../../map/map.h"
 
-
 void GameScene::Init()
 {
+    gameOver = false;
+
     // タイル
     TileManager::LoadTiles("Data/Map/1985_tiles.png", 8, 8);
 
@@ -110,24 +113,30 @@ void GameScene::Update()
         exit(0);
     }
 
-        // プレイヤーが生存しているかチェック
-    if (!player.IsAlive())
+    if (gameOver)
     {
-        // ゲームオーバー処理（ここでは簡単にゲーム終了）
-        DxLib_End();
-        exit(0);
+        if (input.IsKeyDownTrigger(KEY_INPUT_RETURN))
+        {
+            SceneManager::ChangeScene(new TitleScene());
+            return;
+        }
+
+        input.LateUpdate();
+        return;
     }
 
-    //プレイヤーの更新
     player.Update(input);
     enemyManager.Update(player);
-
-    //ボス戦開始
     bossBattle.Update(player);
 
-  //====================
-  // カメラ更新
-  //====================
+    if (!player.IsAlive() && player.IsDeathAnimationFinished())
+    {
+        gameOver = true;
+    }
+
+    //====================
+    // カメラ更新
+    //====================
 
     int screenW, screenH;
     GetScreenState(&screenW, &screenH, NULL);
@@ -174,6 +183,17 @@ void GameScene::Draw()
     enemyManager.Draw(cameraX,cameraY);
     player.Draw(cameraX, cameraY);
     bossBattle.Draw(cameraX, cameraY);
+
+    if (gameOver)
+    {
+        int screenW = 1280;
+        int screenH = 720;
+        GetScreenState(&screenW, &screenH, NULL);
+
+        DrawBox(0, 0, screenW, screenH, GetColor(0, 0, 0), TRUE);
+        DrawString(screenW / 2 - 60, screenH / 2 - 20, "GAME OVER", GetColor(255, 0, 0));
+        DrawString(screenW / 2 - 110, screenH / 2 + 20, "PRESS ENTER TO TITLE", GetColor(255, 255, 255));
+    }
 }
 void GameScene::End()
 {

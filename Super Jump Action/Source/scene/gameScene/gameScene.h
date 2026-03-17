@@ -45,5 +45,6 @@ private:
     float bossTriggerX = 0;
     float bossTriggerY = 0;
 
-  
+    //ゲームオーバー表示状態
+    bool gameOver = false;
 };

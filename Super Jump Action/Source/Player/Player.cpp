@@ -32,6 +32,7 @@ Player::Player()
     jumpFrames = 0;
     fallFrames = 0;
     attackFrames = 0;
+    deathFrames = 0;
     state = State::Idle;
     facingRight = true; // 初期状態は右向き
 
@@ -71,8 +72,14 @@ Player::Player()
         attackFrames = spriteAttack.GetTotal();
     }
 
+    // DEATH スプライトシート読み込み
+    if (spriteDeath.Load("Data/Player/Sprites/DEATH.png", 9, 1, 96, 96))
+    {
+        deathFrames = spriteDeath.GetTotal();
+    }
+
     // 少なくとも1つのスプライトが読み込めたら有効化
-    if (idleFrames > 0 || runFrames > 0 || jumpFrames > 0 || fallFrames > 0 || attackFrames > 0)
+    if (idleFrames > 0 || runFrames > 0 || jumpFrames > 0 || fallFrames > 0 || attackFrames > 0 || deathFrames > 0)
     {
         useSpriteSheet = true;
         // 初期状態は Idle
@@ -85,6 +92,15 @@ Player::Player()
 
 void Player::Update(Input& input)
 {
+    if (!alive)
+    {
+        if (useSpriteSheet && state == State::Death)
+        {
+            anim.Update();
+        }
+        return;
+    }
+
     bool moving = false;
 
     // 入力
@@ -296,6 +312,13 @@ void Player::Update(Input& input)
                     anim.Start(0, attackFrames - 1, 4, false);
                 }
                 break;
+
+            case State::Death:
+                if (deathFrames > 0)
+                {
+                    anim.Start(0, deathFrames - 1, 5, false);
+                }
+                break;
             }
         }
 
@@ -342,6 +365,10 @@ void Player::Draw(float camX,float camY)
         case State::Attack:
             if (attackFrames > 0)
                 handle = spriteAttack.Get(frame);
+            break;
+        case State::Death:
+            if (deathFrames > 0)
+                handle = spriteDeath.Get(frame);
             break;
         }
         
@@ -495,10 +522,30 @@ bool Player::IsAlive() const
     return alive;
 }
 
-void Player::TakeDamageFromEnemy()
+bool Player::IsDeathAnimationFinished() const
+{
+    return !alive && state == State::Death && anim.IsFinished();
+}
+
+void Player::StartDeath()
 {
     if (!alive) return;
+
     alive = false;
+    attacking = false;
+    attackTimer = 0;
+    vy = 0.0f;
+    state = State::Death;
+
+    if (useSpriteSheet && deathFrames > 0)
+    {
+        anim.Start(0, deathFrames - 1, 5, false);
+    }
+}
+
+void Player::TakeDamageFromEnemy()
+{
+    StartDeath();
 }
 
 void Player::CheckEnemyCollision(const Rect& enemyRect, bool& outEnemyStomped)
@@ -538,6 +585,6 @@ void Player::CheckEnemyCollision(const Rect& enemyRect, bool& outEnemyStomped)
     {
         // 横からぶつかった → 死亡
         outEnemyStomped = false;
-        alive = false;
+        StartDeath();
     }
 }
