@@ -1,5 +1,7 @@
 #include "TutorialBoss.h"
 #include "DxLib.h"
+#include "../../../map/map.h"
+#include "../../../map/tileManager/tileManager.h"
 
 //デバック
 #include "../../../GameDebug/GameDebug.h"
@@ -165,11 +167,28 @@ void TutorialBoss::Update(const Player& player)
 
         x += dashSpeed * direction;
 
-        if (x < 1200 || x > 1700)
+        if (x < camXRef)  // ← 左端
         {
             direction *= -1;
+            x = camXRef;
             ChangeState(State::DashEnd);
             stateChanged = true;
+            break;
+        }
+
+        // 右：タイルの壁
+        {
+            const int actualTileSize = TILE_SIZE * SCALE;
+            int checkX = (int)(x + 128) / actualTileSize;
+            int checkY = (int)(y + 64) / actualTileSize;
+
+            if (IsWall(checkX, checkY))
+            {
+                direction *= -1;
+                x -= dashSpeed * 2;
+                ChangeState(State::DashEnd);
+                stateChanged = true;
+            }
         }
 
         break;
