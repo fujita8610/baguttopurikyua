@@ -4,10 +4,6 @@
 #include "scene/sceneManager.h"
 #include "scene/title/titleScene.h"
 
-//font
-#include "../Source/FontManager/Fontmanager.h"
-
-
 //ゲームデバッグ
 #include "../Source/GameDebug/GameDebug.h"
 

@@ -144,13 +144,16 @@ void TutorialBoss::Update(const Player& player)
         break;
 
     case State::Stamp:
+    {
+        int frame = anim.GetFrame();
+        stampAttacking = (frame >= 8 && frame <= 10);
 
         if (anim.IsFinished())
         {
             ChangeState(State::Idle);
             stateChanged = true;
         }
-
+    }
         break;
 
     case State::DashStart:
@@ -295,6 +298,20 @@ void TutorialBoss::Draw(float camX, float camY)
             GetColor(0, 0, 255),
             FALSE
         );
+
+        if (stampAttacking)
+        {
+            Rect sa = GetStampAttackRect();
+            DrawBox(
+                (int)(sa.left - camX),
+                (int)(sa.top - camY),
+                (int)(sa.right - camX),
+                (int)(sa.bottom - camY),
+                GetColor(255, 255, 0),  // ‰©F
+                FALSE
+            );
+        }
+
     }
 }
 
@@ -330,6 +347,24 @@ Rect TutorialBoss::GetRect() const
         r.right = x + 128 - 25;   // x + 103
     }
     r.top = y + 95;
+    r.bottom = y + 128;
+    return r;
+}
+
+Rect TutorialBoss::GetStampAttackRect() const
+{
+    Rect r;
+    if (direction == -1)  // ¶Œü‚«
+    {
+        r.left = x - 60;
+        r.right = x + 25;
+    }
+    else  // ‰EŒü‚«
+    {
+        r.left = x + 100;
+        r.right = x + 185;
+    }
+    r.top = y + 90;
     r.bottom = y + 128;
     return r;
 }

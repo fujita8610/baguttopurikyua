@@ -10,14 +10,18 @@ public:
 
     void Update(const Player& player) override;
     void Draw(float camX, float camY) override;
+    
     Rect GetRect() const override;
     Rect GetHeadRect() const;
+    Rect GetStampAttackRect() const;
+
+    bool IsStampAttacking() const { return stampAttacking; }
 
     void SetCamera(float camX) { camXRef = camX; }
 
 private:
 
-    float camXRef = 0.0f;
+   
     enum class State
     {
         Idle,
@@ -59,6 +63,10 @@ private:
     void ChangeState(State newState);
 
     bool idleRolled = false;
+
+    float camXRef = 0.0f;
+
+    bool stampAttacking = false;
 
     int idleTimer = 0;
 };
