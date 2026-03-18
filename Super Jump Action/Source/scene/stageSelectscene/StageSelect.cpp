@@ -31,17 +31,21 @@ void StageSelectScene::Update()
     // ↓キー
     if (input.IsKeyDownTrigger(KEY_INPUT_DOWN))
     {
-        cursor++;
-        if (cursor >= STAGE_MAX)
-            cursor = 0;
+        do {
+            cursor++;
+            if (cursor >= STAGE_MAX)
+                cursor = 0;
+        } while (!isUnlocked[cursor]);
     }
 
     // ↑キー
-    if (input.IsKeyDownTrigger(KEY_INPUT_UP))
+    if (input.IsKeyDownTrigger(KEY_INPUT_DOWN))
     {
-        cursor--;
-        if (cursor < 0)
-            cursor = STAGE_MAX - 1;
+        do {
+            cursor++;
+            if (cursor >= STAGE_MAX)
+                cursor = 0;
+        } while (!isUnlocked[cursor]);
     }
 
     // 決定
