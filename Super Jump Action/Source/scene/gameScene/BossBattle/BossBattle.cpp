@@ -29,17 +29,14 @@ void BossBattleManager::Update(Player& player)
 
     case BOSS_INTRO:
 
+        cameraX = boss->GetX() - 640 / 2 - 96;
         state = BOSS_BATTLE;
-
         break;
 
     case BOSS_BATTLE:
 
         boss->SetCamera(cameraX);
         boss->Update(player);
-
-        cameraX = boss->GetX() - 640 / 2;
-
         break;
 
     case BOSS_DEAD:

@@ -274,8 +274,8 @@ void TutorialBoss::Draw(float camX, float camY)
 
     if (GameDebug::IsDebug())
     {
+        // 胴体の当たり判定（赤）
         Rect r = GetRect();
-
         DrawBox(
             (int)(r.left - camX),
             (int)(r.top - camY),
@@ -284,17 +284,52 @@ void TutorialBoss::Draw(float camX, float camY)
             GetColor(255, 0, 0),
             FALSE
         );
+
+        // 頭の当たり判定（青）
+        Rect h = GetHeadRect();
+        DrawBox(
+            (int)(h.left - camX),
+            (int)(h.top - camY),
+            (int)(h.right - camX),
+            (int)(h.bottom - camY),
+            GetColor(0, 0, 255),
+            FALSE
+        );
     }
+}
+
+Rect TutorialBoss::GetHeadRect() const
+{
+    Rect r;
+    if (direction == -1)  // 右向き
+    {
+        r.left = x + 25;
+        r.right = x + 80;
+    }
+    else  // 左向き
+    {
+        r.left = x + 128 - 80;  // x + 48
+        r.right = x + 128 - 25;  // x + 103
+    }
+    r.top = y + 60;
+    r.bottom = y + 95;
+    return r;
 }
 
 Rect TutorialBoss::GetRect() const
 {
     Rect r;
-
-    r.left = x;
-    r.right = x + 128;
-    r.top = y + 32;
+    if (direction == -1)  // 右向き
+    {
+        r.left = x + 25;
+        r.right = x + 100;
+    }
+    else  // 左向き
+    {
+        r.left = x + 128 - 100;  // x + 28
+        r.right = x + 128 - 25;   // x + 103
+    }
+    r.top = y + 95;
     r.bottom = y + 128;
-
     return r;
 }

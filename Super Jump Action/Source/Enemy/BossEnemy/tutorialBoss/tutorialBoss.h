@@ -11,6 +11,7 @@ public:
     void Update(const Player& player) override;
     void Draw(float camX, float camY) override;
     Rect GetRect() const override;
+    Rect GetHeadRect() const;
 
     void SetCamera(float camX) { camXRef = camX; }
 
