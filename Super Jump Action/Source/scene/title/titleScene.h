@@ -22,6 +22,7 @@ class TitleScene : public Scene
 
 
         //‰æ‘œƒnƒ“ƒhƒ‹
+        int bgHandle = -1;
         int titleFrameHandle = -1;
         int selectBarHandle = -1;
 
