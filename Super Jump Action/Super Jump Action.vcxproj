@@ -149,6 +149,7 @@
     <ClCompile Include="Source\scene\gameScene\gameScene.cpp" />
     <ClCompile Include="Source\scene\option\option.cpp" />
     <ClCompile Include="Source\scene\sceneManager.cpp" />
+    <ClCompile Include="Source\scene\stageSelectscene\StageSelect.cpp" />
     <ClCompile Include="Source\scene\title\titleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,7 @@
     <ClInclude Include="Source\Enemy\MushroomSpike\MushroomSpike.h" />
     <ClInclude Include="Source\scene\gameScene\BossBattle\BossBattle.h" />
     <ClInclude Include="Source\scene\option\option.h" />
+    <ClInclude Include="Source\scene\stageSelectscene\StageSelect.h" />
     <ClInclude Include="Source\System\Config.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\BossBase.h" />
     <ClInclude Include="Source\Enemy\EnemyBase\EnemyBase.h" />

@@ -1,5 +1,6 @@
 #include "BossBattle.h"
 #include "DxLib.h"
+#include "../../../Enemy/EnemyCollision/EnemyCollision.h"
 
 void BossBattleManager::Init(float bossX, float bossY)
 {
@@ -37,6 +38,26 @@ void BossBattleManager::Update(Player& player)
 
         boss->SetCamera(cameraX);
         boss->Update(player);
+
+        if (player.IsAttacking())
+        {
+            if (EnemyCollision::CheckRect(player.GetAttackRect(), boss->GetRect()) ||
+                EnemyCollision::CheckRect(player.GetAttackRect(), boss->GetHeadRect()))
+            {
+                boss->TakeDamage(1);
+            }
+        }
+
+        if (EnemyCollision::CheckRect(player.GetRect(), boss->GetHeadRect()))
+        {
+            bool stomped = false;
+            const_cast<Player&>(player).CheckEnemyCollision(boss->GetHeadRect(), stomped);
+            if (stomped)
+            {
+                boss->TakeDamage(1);
+            }
+        }
+
         break;
 
     case BOSS_DEAD:

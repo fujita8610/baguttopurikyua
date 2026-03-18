@@ -7,7 +7,7 @@
 #include "../../../GameDebug/GameDebug.h"
 
 TutorialBoss::TutorialBoss(float startX, float startY)
-    : BossBase(startX, startY, 20)
+    : BossBase(startX, startY, 3)
 {
     idle.Load("Data/Enemy/Boss_tutorial/Dino Rex/dino_rex_idle.png", 5, 1, 128, 128);
 
@@ -78,6 +78,9 @@ void TutorialBoss::ChangeState(State newState)
 
 void TutorialBoss::Update(const Player& player)
 {
+    if (invincibleTimer > 0)
+        invincibleTimer--;
+
     bool stateChanged = false;
 
     switch (state)
@@ -215,6 +218,8 @@ void TutorialBoss::Update(const Player& player)
 
 void TutorialBoss::Draw(float camX, float camY)
 {
+    DrawFormatString(0, 120, GetColor(255, 255, 0), "invincibleTimer=%d", invincibleTimer);
+
     int frame = anim.GetFrame();
     int handle = -1;
     int offsetX = 0;
@@ -270,10 +275,17 @@ void TutorialBoss::Draw(float camX, float camY)
 
     if (handle == -1) return;
 
+    if (invincibleTimer > 0 && (invincibleTimer % 4 < 2))
+    {
+        SetDrawBright(255, 0, 0);  // Ô‚­
+    }
+
     if (direction == 1)
         DrawGraph(drawX, drawY, handle, TRUE);
     else
         DrawTurnGraph(drawX, drawY, handle, TRUE);
+
+    SetDrawBright(255, 255, 255);
 
     if (GameDebug::IsDebug())
     {

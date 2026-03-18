@@ -20,6 +20,7 @@
     <ClCompile Include="Source\scene\gameScene\BossBattle\BossBattle.cpp" />
     <ClCompile Include="Source\scene\option\option.cpp" />
     <ClCompile Include="Source\Enemy\EnemyCollision\EnemyCollision.cpp" />
+    <ClCompile Include="Source\scene\stageSelectscene\StageSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation\Animation.h" />
@@ -47,5 +48,6 @@
     <ClInclude Include="Source\scene\gameScene\BossBattle\BossBattle.h" />
     <ClInclude Include="Source\scene\option\option.h" />
     <ClInclude Include="Source\Enemy\EnemyCollision\EnemyCollision.h" />
+    <ClInclude Include="Source\scene\stageSelectscene\StageSelect.h" />
   </ItemGroup>
 </Project>
