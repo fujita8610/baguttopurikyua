@@ -3,6 +3,7 @@
 //scene関連
 #include "titleScene.h"
 #include "../sceneManager.h"
+#include "../stageSelectscene/StageSelect.h"
 #include "../../scene/gameScene/gameScene.h"
 #include "../../scene/option/option.h"
 
@@ -82,7 +83,7 @@ void TitleScene::Update()
         switch (cursor)
         {
         case 0: // ゲームスタート
-            SceneManager::ChangeScene(new GameScene());
+            SceneManager::ChangeScene(new StageSelectScene());
             return;
 
         case 1: // 続きから

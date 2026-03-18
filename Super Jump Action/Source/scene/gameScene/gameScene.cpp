@@ -19,7 +19,7 @@ void GameScene::Init()
     TileManager::SetScale(4.0f);
 
     // マップ
-    MapManager::Init();
+    MapManager::Init((StageID)stage);
 
     // プレイヤー初期位置
     player.SetPosition(
@@ -197,4 +197,9 @@ void GameScene::Draw()
 }
 void GameScene::End()
 {
+}
+
+GameScene::GameScene(int stageNum)
+{
+    stage = stageNum;
 }

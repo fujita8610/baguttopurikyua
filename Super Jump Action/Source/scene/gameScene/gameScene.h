@@ -23,6 +23,8 @@
 class GameScene : public Scene
 {
 public:
+    GameScene(int stageNum);
+
     void Init() override;
     void Update() override;
     void Draw() override;
@@ -30,6 +32,7 @@ public:
 
 private:
     //cppéŒ¾—p
+    int stage = 0; //
 
     Player player;
     Input input;

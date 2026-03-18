@@ -19,7 +19,7 @@ class MapManager
 {
 public:
 
-    static void Init();
+    static void Init(StageID stage);
 
     static void LoadStage(StageID stage);
 

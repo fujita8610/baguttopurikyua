@@ -15,9 +15,9 @@ const char* StageFileName[STAGE_MAX] =
     "data/map/CSV/stage3.csv"
 };
 
-void MapManager::Init()
+void MapManager::Init(StageID stage)
 {
-    LoadStage(STAGE_tutoreal);
+    LoadStage(stage);
 }
 
 void MapManager::LoadStage(StageID stage)
