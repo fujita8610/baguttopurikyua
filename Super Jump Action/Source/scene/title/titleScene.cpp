@@ -16,6 +16,9 @@ void TitleScene::Init()
     inputWait = 10; //10秒間入力虫
 
    // 画像読み込み
+   // タイトル
+    titleLogoHandle = LoadGraph("Data/Title/title.jpg");
+
    // 背景
     bgHandle = LoadGraph("Data/Title/20131005080742.png");
     if (bgHandle == -1)
@@ -118,13 +121,13 @@ void TitleScene::Draw()
     );
 
     //タイトル
-    DrawExtendString(
-        200,
+    DrawRotaGraph(
+        340,
         150,
-        2.0,   // 横倍率
-        2.0,   // 縦倍率
-        "SUPER JUMP ACTION",
-        GetColor(255, 255, 255)
+        0.25,  
+        0.0,
+        titleLogoHandle,
+        TRUE
     );
 
 
@@ -188,8 +191,8 @@ void TitleScene::Draw()
         int idleFrame = playerIdleAnim.GetFrame();
         int idleHandle = playerIdle.Get(idleFrame);
 
-        // 左の大きいスペース
-        int playerX = 200;
+        // 左の大きいスペースにプレイヤー配置
+        int playerX = 100;
         int playerY = 350;
 
         // ===== プレイヤー待機モーション =====
