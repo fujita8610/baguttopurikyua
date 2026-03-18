@@ -18,4 +18,8 @@ private:
 
     int inputWait = 10;
     int blinkTimer = 0;
+
+
+    static bool isUnlocked[STAGE_MAX];
+    static void UnlockStage(int stageIndex);
 };

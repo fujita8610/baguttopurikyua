@@ -12,6 +12,7 @@ void StageSelectScene::Init()
     cursor = 0;
     inputWait = 10;
     blinkTimer = 0;
+
 }
 
 void StageSelectScene::Update()
@@ -46,6 +47,10 @@ void StageSelectScene::Update()
     // 決定
     if (input.IsKeyDownTrigger(KEY_INPUT_RETURN))
     {
+        // ロック中なら何もしない
+        if (!isUnlocked[cursor])
+            return;
+
         SceneManager::ChangeScene(new GameScene(cursor));
         return;
     }
@@ -86,6 +91,14 @@ void StageSelectScene::Draw()
     {
         int y = baseY + i * 60;
 
+        // ロック中
+        if (!isUnlocked[i])
+        {
+            DrawString(baseX, y, "LOCK", GetColor(100, 100, 100));
+            continue;
+        }
+
+        // 通常
         if (i == cursor)
         {
             DrawString(baseX, y, stageNames[i], blinkColor);
@@ -100,3 +113,5 @@ void StageSelectScene::Draw()
 void StageSelectScene::End()
 {
 }
+
+bool StageSelectScene::isUnlocked[STAGE_MAX] = { true, false, false, false };
