@@ -233,8 +233,6 @@ void TutorialBoss::Update(const Player& player)
 
 void TutorialBoss::Draw(float camX, float camY)
 {
-    DrawFormatString(0, 120, GetColor(255, 255, 0), "invincibleTimer=%d", invincibleTimer);
-
     int frame = anim.GetFrame();
     int handle = -1;
     int offsetX = 0;
