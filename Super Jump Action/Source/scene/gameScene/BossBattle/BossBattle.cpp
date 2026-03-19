@@ -39,12 +39,25 @@ void BossBattleManager::Update(Player& player)
         boss->SetCamera(cameraX);
         boss->Update(player);
 
+        if (!boss->IsAlive() && boss->IsDeathFinished())
+        {
+            state = BOSS_DEAD;
+        }
+
         if (player.IsAttacking())
         {
             if (EnemyCollision::CheckRect(player.GetAttackRect(), boss->GetRect()) ||
                 EnemyCollision::CheckRect(player.GetAttackRect(), boss->GetHeadRect()))
             {
                 boss->TakeDamage(1);
+            }
+        }
+
+        if (boss->IsStampAttacking())
+        {
+            if (EnemyCollision::CheckRect(player.GetRect(), boss->GetStampAttackRect()))
+            {
+                const_cast<Player&>(player).TakeDamageFromEnemy();
             }
         }
 
@@ -89,6 +102,11 @@ void BossBattleManager::Draw(float camX, float camY)
 bool BossBattleManager::IsBattle() const
 {
     return state == BOSS_BATTLE;
+}
+
+bool BossBattleManager::IsDead() const
+{
+    return state == BOSS_DEAD;
 }
 
 float BossBattleManager::GetCameraX() const

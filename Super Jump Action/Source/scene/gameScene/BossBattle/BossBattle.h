@@ -20,6 +20,7 @@ public:
     void Draw(float camX, float camY);
 
     bool IsBattle() const;
+    bool IsDead() const;
     float GetCameraX() const;
 
 private:

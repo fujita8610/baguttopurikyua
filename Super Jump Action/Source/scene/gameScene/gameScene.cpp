@@ -2,6 +2,7 @@
 #include "gameScene.h"
 #include "../sceneManager.h"
 #include "../title/titleScene.h"
+#include "../stageSelectscene/StageSelect.h"
 
 //マップ関連
 #include "../../map/manager/mapmanager.h"
@@ -151,6 +152,12 @@ void GameScene::Update()
     else
     {
         cameraX = player.GetX() - screenW / 2;
+    }
+
+    if (bossBattle.IsDead())
+    {
+        SceneManager::ChangeScene(new StageSelectScene());
+        return;
     }
 
     cameraY = player.GetY() - screenH / 2;

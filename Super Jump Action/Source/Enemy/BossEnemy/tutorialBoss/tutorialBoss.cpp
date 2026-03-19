@@ -81,6 +81,19 @@ void TutorialBoss::Update(const Player& player)
     if (invincibleTimer > 0)
         invincibleTimer--;
 
+    if (!isAlive)
+    {
+        deathTimer++;
+        return;
+    }
+
+    if (hp <= 0)
+    {
+        isAlive = false;
+        deathTimer = 0;
+        return;
+    }
+
     bool stateChanged = false;
 
     switch (state)
@@ -275,7 +288,24 @@ void TutorialBoss::Draw(float camX, float camY)
 
     if (handle == -1) return;
 
-    if (invincibleTimer > 0 && (invincibleTimer % 4 < 2))
+    if (!isAlive)
+    {
+        float ratio = 1.0f - (float)deathTimer / DEATH_DURATION;
+        int bright = (int)(255 * ratio);
+        bright = max(0, bright);
+        SetDrawBright(bright, bright, bright);
+
+        // ã‚©‚çÁ‚¦‚é
+        int clipH = (int)(128 * ratio);
+        if (clipH <= 0)
+        {
+            SetDrawBright(255, 255, 255);
+            return;  // Š®‘S‚ÉÁ‚¦‚é
+        }
+
+        SetDrawArea(0, (int)(y - camY) + (128 - clipH), 1920, 1080);
+    }
+    else if (invincibleTimer > 0 && (invincibleTimer % 4 < 2))
     {
         SetDrawBright(255, 0, 0);  // Ô‚­
     }
@@ -286,6 +316,7 @@ void TutorialBoss::Draw(float camX, float camY)
         DrawTurnGraph(drawX, drawY, handle, TRUE);
 
     SetDrawBright(255, 255, 255);
+    SetDrawArea(0, 0, 1920, 1080);
 
     if (GameDebug::IsDebug())
     {

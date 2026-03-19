@@ -16,12 +16,11 @@ public:
     Rect GetStampAttackRect() const;
 
     bool IsStampAttacking() const { return stampAttacking; }
+    bool IsDeathFinished() const { return deathTimer >= DEATH_DURATION; }
 
     void SetCamera(float camX) { camXRef = camX; }
 
 private:
-
-   
     enum class State
     {
         Idle,
@@ -69,4 +68,10 @@ private:
     bool stampAttacking = false;
 
     int idleTimer = 0;
+
+    bool isDying = false;
+
+    int deathTimer = 0;
+
+    const int DEATH_DURATION = 120;
 };
