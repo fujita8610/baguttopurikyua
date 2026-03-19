@@ -10,7 +10,8 @@ public:
 
     void Update(const Player& player) override;
     void Draw(float camX, float camY) override;
-    
+    void TakeDamage(int damage) override;
+
     Rect GetRect() const override;
     Rect GetHeadRect() const;
     Rect GetStampAttackRect() const;
@@ -73,5 +74,9 @@ private:
 
     int deathTimer = 0;
 
+    int dashFlashTimer = 0;
+
     const int DEATH_DURATION = 120;
+
+    bool isEnraged = false;
 };

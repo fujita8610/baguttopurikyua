@@ -183,6 +183,7 @@ void TutorialBoss::Update(const Player& player)
         break;
 
     case State::DashLoop:
+        dashFlashTimer++;
 
         x += dashSpeed * direction;
 
@@ -213,6 +214,7 @@ void TutorialBoss::Update(const Player& player)
         break;
 
     case State::DashEnd:
+        dashFlashTimer = 0;
 
         if (anim.IsFinished())
         {
@@ -305,9 +307,15 @@ void TutorialBoss::Draw(float camX, float camY)
 
         SetDrawArea(0, (int)(y - camY) + (128 - clipH), 1920, 1080);
     }
+    else if (state == State::DashLoop)
+    {
+        // ★ダッシュ中は黄色く点滅
+        if (dashFlashTimer % 4 < 2)
+            SetDrawBright(255, 255, 0);
+    }
     else if (invincibleTimer > 0 && (invincibleTimer % 4 < 2))
     {
-        SetDrawBright(255, 0, 0);  // 赤く
+        SetDrawBright(255, 0, 0);  // ダメージ時は赤
     }
 
     if (direction == 1)
@@ -410,4 +418,17 @@ Rect TutorialBoss::GetStampAttackRect() const
     r.top = y + 90;
     r.bottom = y + 128;
     return r;
+}
+
+void TutorialBoss::TakeDamage(int damage)
+{
+    if (invincibleTimer > 0) return;
+    if (state == State::DashLoop) return;
+
+    BossBase::TakeDamage(damage);
+
+    if (isAlive)
+    {
+        ChangeState(State::DashStart);
+    }
 }

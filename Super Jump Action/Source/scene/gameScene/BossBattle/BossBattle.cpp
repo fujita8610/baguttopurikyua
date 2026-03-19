@@ -44,30 +44,33 @@ void BossBattleManager::Update(Player& player)
             state = BOSS_DEAD;
         }
 
-        if (player.IsAttacking())
+        if (boss->IsAlive())
         {
-            if (EnemyCollision::CheckRect(player.GetAttackRect(), boss->GetRect()) ||
-                EnemyCollision::CheckRect(player.GetAttackRect(), boss->GetHeadRect()))
+            if (player.IsAttacking())
             {
-                boss->TakeDamage(1);
+                if (EnemyCollision::CheckRect(player.GetAttackRect(), boss->GetRect()) ||
+                    EnemyCollision::CheckRect(player.GetAttackRect(), boss->GetHeadRect()))
+                {
+                    boss->TakeDamage(1);
+                }
             }
-        }
 
-        if (boss->IsStampAttacking())
-        {
-            if (EnemyCollision::CheckRect(player.GetRect(), boss->GetStampAttackRect()))
+            if (boss->IsStampAttacking())
             {
-                const_cast<Player&>(player).TakeDamageFromEnemy();
+                if (EnemyCollision::CheckRect(player.GetRect(), boss->GetStampAttackRect()))
+                {
+                    const_cast<Player&>(player).TakeDamageFromEnemy();
+                }
             }
-        }
 
-        if (EnemyCollision::CheckRect(player.GetRect(), boss->GetHeadRect()))
-        {
-            bool stomped = false;
-            const_cast<Player&>(player).CheckEnemyCollision(boss->GetHeadRect(), stomped);
-            if (stomped)
+            if (EnemyCollision::CheckRect(player.GetRect(), boss->GetHeadRect()))
             {
-                boss->TakeDamage(1);
+                bool stomped = false;
+                const_cast<Player&>(player).CheckEnemyCollision(boss->GetHeadRect(), stomped);
+                if (stomped)
+                {
+                    boss->TakeDamage(1);
+                }
             }
         }
 

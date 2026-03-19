@@ -29,7 +29,7 @@ public:
     virtual void Draw(float camX, float camY) override = 0;
     virtual Rect GetRect() const override = 0;
 
-    void TakeDamage(int damage)
+    virtual void TakeDamage(int damage)
     {
         if (!isAlive) return;
         if (invincibleTimer > 0) return;
