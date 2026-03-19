@@ -33,7 +33,7 @@ bool LoadMapCSV(const char* filename)
 
     if (!fp)
     {
-        printfDx("File open error\n");
+        //printfDx("File open error\n");
         return false;
     }
 
@@ -52,7 +52,7 @@ bool LoadMapCSV(const char* filename)
         {
             if (fscanf_s(fp, "%d", &g_Map[y][x]) != 1)
             {
-                printfDx("Read error y=%d x=%d\n", y, x);
+                //printfDx("Read error y=%d x=%d\n", y, x);
                 fclose(fp);
                 return false;
             }
@@ -105,7 +105,7 @@ bool LoadMapCSV(const char* filename)
 
     fclose(fp);
 
-    printfDx("CSV Load Success\n");
+   // printfDx("CSV Load Success\n");
 
     return true;
 }
